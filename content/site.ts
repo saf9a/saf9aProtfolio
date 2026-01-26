@@ -370,7 +370,7 @@ export const site = {
     mission:
       "We help ambitious teams ship reliable software without the overhead of a full internal engineering team.",
     story:
-      "<STUDIO_NAME> is a two-person studio in Tunis. We combine product thinking, clean engineering, and operational discipline to deliver work that feels enterprise-ready but moves like a startup.",
+      "Saf9a is a two-person studio in Tunis. We combine product thinking, clean engineering, and operational discipline to deliver work that feels enterprise-ready but moves like a startup.",
     values: [
       {
         title: "Outcome first",
@@ -391,18 +391,18 @@ export const site = {
     ],
     founders: [
       {
-        name: "Amina Ben Salah",
-        role: "Product and Frontend",
+        name: "Slim Dridi",
+        role: "Ai engineer",
         bio: "Designs and builds product experiences with a focus on conversion, clarity, and performance.",
       },
       {
-        name: "Youssef Cherif",
-        role: "Backend and DevOps",
+        name: "Ismail Khlifi",
+        role: "Backend and MLOps",
         bio: "Leads architecture, integrations, and deployment systems that stay reliable under load.",
       },
     ],
     whyTunisia: [
-      "Strong engineering talent with global delivery experience.",
+      "Strong engineering talent with global delivery    experience.",
       "Time zone alignment with Europe and flexible overlap with MENA teams.",
       "Lower overhead lets you invest more in product quality.",
     ],
