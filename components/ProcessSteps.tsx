@@ -1,7 +1,7 @@
 import type { ProcessStep } from "@/content/site";
 
 type ProcessStepsProps = {
-  steps: ProcessStep[];
+  steps: readonly ProcessStep[];
 };
 
 export function ProcessSteps({ steps }: ProcessStepsProps) {

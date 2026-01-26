@@ -4,7 +4,7 @@ type CaseStudyCardProps = {
   title: string;
   summary: string;
   industry: string;
-  metrics: string[];
+  metrics: readonly string[];
 };
 
 export function CaseStudyCard({ title, summary, industry, metrics }: CaseStudyCardProps) {
