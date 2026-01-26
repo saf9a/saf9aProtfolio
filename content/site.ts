@@ -60,7 +60,7 @@ export type Founder = {
 
 export const site = {
   name: "Saf9a",
-  url: "https://example.com",
+  url: "https://saf9a.vercel.app",
   location: "Tunis, Tunisia",
   email: "hello@<domain>.com",
   calendlyUrl: "https://calendly.com/<your-handle>/intro",
