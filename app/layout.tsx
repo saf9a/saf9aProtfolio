@@ -43,8 +43,8 @@ export const metadata: Metadata = {
     follow: true,
   },
   icons: {
-    icon: "/favicon-circle.png",
-    shortcut: "/favicon-circle.png",
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
     apple: "/favicon-circle.png",
   },
   openGraph: {
