@@ -50,17 +50,12 @@ export default function ContactPage() {
             </div>
           </div>
           <div className="rounded-2xl border border-border bg-background p-4">
-            <p className="text-sm font-semibold">Prefer a quick call?</p>
+            <p className="text-sm font-semibold">Need a custom booking?</p>
             <p className="mt-2 text-sm text-muted-foreground">
-              Book a time that works for you and we will follow up with a plan.
+              Share a preferred time window and we will confirm the best slot by email.
             </p>
-            <Button
-              href={site.calendlyUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="mt-4 w-full justify-center"
-            >
-              Book a call
+            <Button href="/book" className="mt-4 w-full justify-center">
+              {site.booking.primaryCta}
             </Button>
           </div>
         </div>

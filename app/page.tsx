@@ -31,7 +31,7 @@ export default function HomePage() {
               </h1>
               <p className="mt-6 text-lg text-muted-foreground">{site.hero.subheadline}</p>
               <div className="mt-8 flex flex-wrap gap-4">
-                <Button href={site.calendlyUrl} target="_blank" rel="noreferrer">
+                <Button href="/book">
                   {site.hero.primaryCta}
                 </Button>
                 <Button href="/work" variant="secondary">
@@ -224,8 +224,8 @@ export default function HomePage() {
               <p className="mt-4 text-sm text-background/80">{site.contact.description}</p>
             </div>
             <div className="flex flex-col items-start justify-center gap-4">
-              <Button href={site.calendlyUrl} target="_blank" rel="noreferrer">
-                Book a call
+              <Button href="/book">
+                {site.booking.primaryCta}
               </Button>
               <Link href={"mailto:" + site.email} className="text-sm font-semibold">
                 {site.email}

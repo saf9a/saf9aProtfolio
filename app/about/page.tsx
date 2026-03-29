@@ -14,7 +14,7 @@ export default function AboutPage() {
       <Section>
         <SectionHeading
           overline="About"
-          title="A two-person studio with senior expertise"
+          title="A studio with senior expertise"
           description={site.about.mission}
         />
         <p className="mt-6 max-w-3xl text-sm text-muted-foreground">{site.about.story}</p>

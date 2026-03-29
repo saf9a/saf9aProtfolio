@@ -1,8 +1,6 @@
 export type NavLink = {
   label: string;
   href: string;
-  homeHref?: string;
-  sectionId?: string;
 };
 
 export type TrustIndicator = {
@@ -62,16 +60,15 @@ export const site = {
   name: "Saf9a",
   url: "https://saf9a.vercel.app",
   location: "Tunis, Tunisia",
-  email: "hello@<domain>.com",
-  calendlyUrl: "https://calendly.com/<your-handle>/intro",
+  email: "dslimmp@gmail.com",
   description:
-    "A two-person studio in Tunis delivering full-stack web products, DevOps foundations, and AI automation that help teams ship faster and operate with confidence.",
+    "A studio in Tunis delivering full-stack web products, DevOps foundations, and AI automation that help teams ship faster and operate with confidence.",
   hero: {
     kicker: "Full-stack studio",
     headline: "Premium web, cloud, and AI automation for teams that need to ship fast.",
     subheadline:
       "We build modern web products, reliable infrastructure, and practical AI workflows so your team can move faster without piling on tech debt.",
-    primaryCta: "Book a call",
+    primaryCta: "Request a call",
     secondaryCta: "View case studies",
     note: "Based in Tunis, serving startups and scaleups across MENA and Europe.",
     sideTitle: "What a launch looks like",
@@ -88,19 +85,18 @@ export const site = {
     description:
       "Tell us about the outcome you want. We will respond within one business day with next steps and a tailored plan.",
   },
+  booking: {
+    headline: "Request a custom booking",
+    description:
+      "Share your goals, the type of call you need, and a preferred time window. We will confirm the best slot by email within one business day.",
+    primaryCta: "Request a call",
+  },
   navLinks: [
-    { label: "Home", href: "/", homeHref: "/#top", sectionId: "top" },
-    { label: "Services", href: "/services", homeHref: "/#services", sectionId: "services" },
-    { label: "Work", href: "/work", homeHref: "/#work", sectionId: "work" },
-    { label: "About", href: "/about", homeHref: "/#about", sectionId: "about" },
-    { label: "Contact", href: "/contact", homeHref: "/#contact", sectionId: "contact" },
-  ],
-  homeSections: [
-    { id: "top", label: "Top" },
-    { id: "services", label: "Services" },
-    { id: "work", label: "Work" },
-    { id: "about", label: "About" },
-    { id: "contact", label: "Contact" },
+    { label: "Home", href: "/" },
+    { label: "Services", href: "/services" },
+    { label: "Work", href: "/work" },
+    { label: "About", href: "/about" },
+    { label: "Contact", href: "/contact" },
   ],
   trustIndicators: [
     {
@@ -370,7 +366,7 @@ export const site = {
     mission:
       "We help ambitious teams ship reliable software without the overhead of a full internal engineering team.",
     story:
-      "Saf9a is a two-person studio in Tunis. We combine product thinking, clean engineering, and operational discipline to deliver work that feels enterprise-ready but moves like a startup.",
+      "Saf9a is a studio in Tunis. We combine product thinking, clean engineering, and operational discipline to deliver work that feels enterprise-ready but moves like a startup.",
     values: [
       {
         title: "Outcome first",

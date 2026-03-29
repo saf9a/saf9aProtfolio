@@ -76,8 +76,8 @@ export default function ServicesPage() {
             We can help you choose the right scope in a 20-minute discovery call.
           </p>
           <div className="mt-6 flex flex-wrap justify-center gap-4">
-            <Button href={site.calendlyUrl} target="_blank" rel="noreferrer">
-              Book a call
+            <Button href="/book">
+              {site.booking.primaryCta}
             </Button>
             <Button href="/contact" variant="secondary">
               Contact us

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { site } from "@/content/site";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/Button";
@@ -11,35 +11,7 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 
 export function Navbar() {
   const pathname = usePathname();
-  const isHome = pathname === "/";
-  const [activeSection, setActiveSection] = useState("top");
   const [open, setOpen] = useState(false);
-
-  const sectionIds = useMemo(() => site.homeSections.map((section) => section.id), []);
-
-  useEffect(() => {
-    if (!isHome) return;
-    const elements = sectionIds
-      .map((id) => document.getElementById(id))
-      .filter((element): element is HTMLElement => Boolean(element));
-
-    if (!elements.length) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      { rootMargin: "-40% 0px -50% 0px" }
-    );
-
-    elements.forEach((element) => observer.observe(element));
-
-    return () => observer.disconnect();
-  }, [isHome, sectionIds]);
 
   useEffect(() => {
     setOpen(false);
@@ -53,12 +25,11 @@ export function Navbar() {
         </Link>
         <nav className="hidden items-center gap-8 md:flex" aria-label="Primary">
           {site.navLinks.map((link) => {
-            const href = isHome && link.homeHref ? link.homeHref : link.href;
-            const isActive = isHome ? link.sectionId === activeSection : pathname === link.href;
+            const isActive = pathname === link.href;
             return (
               <Link
                 key={link.label}
-                href={href}
+                href={link.href}
                 className={cn(
                   "text-sm font-medium transition hover:text-accent",
                   isActive && "text-accent"
@@ -71,8 +42,8 @@ export function Navbar() {
         </nav>
         <div className="hidden md:flex items-center gap-3">
           <ThemeToggle />
-          <Button href={site.calendlyUrl} target="_blank" rel="noreferrer">
-            Book a call
+          <Button href="/book">
+            {site.booking.primaryCta}
           </Button>
         </div>
         <button
@@ -100,12 +71,11 @@ export function Navbar() {
         <div className="border-t border-border bg-background md:hidden">
           <div className="container flex flex-col gap-4 py-6">
             {site.navLinks.map((link) => {
-              const href = isHome && link.homeHref ? link.homeHref : link.href;
               return (
                 <Link
                   key={link.label}
-                  href={href}
-                  className="text-sm font-medium"
+                  href={link.href}
+                  className={cn("text-sm font-medium", pathname === link.href && "text-accent")}
                   onClick={() => setOpen(false)}
                 >
                   {link.label}
@@ -117,12 +87,10 @@ export function Navbar() {
               <ThemeToggle />
             </div>
             <Button
-              href={site.calendlyUrl}
-              target="_blank"
-              rel="noreferrer"
+              href="/book"
               className="justify-center"
             >
-              Book a call
+              {site.booking.primaryCta}
             </Button>
           </div>
         </div>

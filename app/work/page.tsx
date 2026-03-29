@@ -104,8 +104,8 @@ export default function WorkPage() {
             Tell us about your project and we will suggest the best approach.
           </p>
           <div className="mt-6 flex flex-wrap justify-center gap-4">
-            <Button href={site.calendlyUrl} target="_blank" rel="noreferrer">
-              Book a call
+            <Button href="/book">
+              {site.booking.primaryCta}
             </Button>
             <Button href="/contact" variant="secondary">
               Contact us

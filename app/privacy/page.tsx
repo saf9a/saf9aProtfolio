@@ -18,9 +18,9 @@ export default function PrivacyPage() {
       />
       <div className="mt-8 space-y-6 text-sm text-muted-foreground">
         <p>
-          We only collect information you choose to share through the contact form or by
-          emailing us directly. We use this information to respond to your request and to
-          provide project estimates or proposals.
+          We only collect information you choose to share through the contact form, booking
+          request form, or by emailing us directly. We use this information to respond to your
+          request and to provide project estimates or proposals.
         </p>
         <p>
           We do not sell or rent your data. We may store communication records for internal

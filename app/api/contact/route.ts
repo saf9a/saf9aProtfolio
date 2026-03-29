@@ -11,21 +11,53 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid request." }, { status: 400 });
   }
 
-  const { name, email, company, message } = body as {
+  const {
+    submissionType,
+    name,
+    email,
+    company,
+    message,
+    service,
+    preferredDate,
+    preferredWindow,
+  } = body as {
+    submissionType?: "contact" | "booking";
     name?: string;
     email?: string;
     company?: string;
     message?: string;
+    service?: string;
+    preferredDate?: string;
+    preferredWindow?: string;
   };
 
-  if (!name || !email || !message || !emailRegex.test(email)) {
+  const isBooking = submissionType === "booking";
+
+  if (!name || !email || !emailRegex.test(email) || !message || (isBooking && !service)) {
     return NextResponse.json(
-      { error: "Please provide a name, valid email, and message." },
+      {
+        error: isBooking
+          ? "Please provide your name, valid email, booking type, and details."
+          : "Please provide a name, valid email, and message.",
+      },
       { status: 400 }
     );
   }
 
-  const text = `Name: ${name}\nEmail: ${email}\nCompany: ${company || "-"}\n\n${message}`;
+  const subject = isBooking ? `New booking request from ${name}` : `New inquiry from ${name}`;
+  const text = isBooking
+    ? [
+        "Type: Booking request",
+        `Name: ${name}`,
+        `Email: ${email}`,
+        `Company: ${company || "-"}`,
+        `Call type: ${service}`,
+        `Preferred date: ${preferredDate || "-"}`,
+        `Preferred time window: ${preferredWindow || "-"}`,
+        "",
+        message,
+      ].join("\n")
+    : [`Name: ${name}`, `Email: ${email}`, `Company: ${company || "-"}`, "", message].join("\n");
 
   if (process.env.RESEND_API_KEY) {
     const resend = new Resend(process.env.RESEND_API_KEY);
@@ -37,7 +69,7 @@ export async function POST(request: Request) {
       from: fromEmail,
       to: [toEmail],
       reply_to: email,
-      subject: `New inquiry from ${name}`,
+      subject,
       text,
     });
 
@@ -56,8 +88,18 @@ export async function POST(request: Request) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Accept: "application/json",
       },
-      body: JSON.stringify({ name, email, company, message }),
+      body: JSON.stringify({
+        submissionType: submissionType || "contact",
+        name,
+        email,
+        company,
+        service,
+        preferredDate,
+        preferredWindow,
+        message,
+      }),
     });
 
     if (!response.ok) {
