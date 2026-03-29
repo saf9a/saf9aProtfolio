@@ -1,11 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import { getLocaleFromPathname } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
 const storageKey = "theme";
 
 export function ThemeToggle({ className }: { className?: string }) {
+  const pathname = usePathname();
+  const locale = getLocaleFromPathname(pathname);
   const [theme, setTheme] = useState<"light" | "dark" | null>(null);
 
   useEffect(() => {
@@ -32,7 +36,7 @@ export function ThemeToggle({ className }: { className?: string }) {
         "inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-white/80 text-sm transition hover:border-foreground/30 dark:bg-slate-900/70 dark:border-white/10",
         className
       )}
-      aria-label="Toggle theme"
+      aria-label={locale === "fr" ? "Changer le theme" : "Toggle theme"}
       aria-pressed={isDark}
     >
       {isDark ? (

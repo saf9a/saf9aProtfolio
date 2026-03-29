@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { site } from "@/content/site";
+import { switchLocalePath, type Locale } from "@/lib/i18n";
 
 type PageMetadataOptions = {
   title: string;
   description: string;
   path: string;
   keywords?: string[];
+  locale?: Locale;
 };
 
 export function buildPageMetadata({
@@ -13,6 +15,7 @@ export function buildPageMetadata({
   description,
   path,
   keywords = [],
+  locale = "en",
 }: PageMetadataOptions): Metadata {
   const fullTitle = `${title} | ${site.name}`;
 
@@ -22,6 +25,11 @@ export function buildPageMetadata({
     keywords,
     alternates: {
       canonical: path,
+      languages: {
+        en: switchLocalePath(path, "en"),
+        fr: switchLocalePath(path, "fr"),
+        "x-default": switchLocalePath(path, "en"),
+      },
     },
     openGraph: {
       title: fullTitle,
@@ -33,7 +41,7 @@ export function buildPageMetadata({
           url: "/opengraph-image",
         },
       ],
-      locale: "en_US",
+      locale: locale === "fr" ? "fr_FR" : "en_US",
       type: "website",
     },
     twitter: {

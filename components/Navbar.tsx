@@ -3,14 +3,17 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { site } from "@/content/site";
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/Button";
+import { LanguageToggle } from "@/components/LanguageToggle";
 import { Logo } from "@/components/Logo";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { cn } from "@/lib/utils";
+import { getLocaleFromPathname, getSiteContent, localizeHref } from "@/lib/i18n";
 
 export function Navbar() {
   const pathname = usePathname();
+  const locale = getLocaleFromPathname(pathname);
+  const site = getSiteContent(locale);
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -20,16 +23,18 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur">
       <div className="container flex items-center justify-between py-4">
-        <Link href="/" className="flex items-center">
+        <Link href={localizeHref("/", locale)} className="flex items-center">
           <Logo />
         </Link>
         <nav className="hidden items-center gap-8 md:flex" aria-label="Primary">
           {site.navLinks.map((link) => {
-            const isActive = pathname === link.href;
+            const href = localizeHref(link.href, locale);
+            const isActive = pathname === href;
+
             return (
               <Link
                 key={link.label}
-                href={link.href}
+                href={href}
                 className={cn(
                   "text-sm font-medium transition hover:text-accent",
                   isActive && "text-accent"
@@ -40,19 +45,18 @@ export function Navbar() {
             );
           })}
         </nav>
-        <div className="hidden md:flex items-center gap-3">
+        <div className="hidden items-center gap-3 md:flex">
+          <LanguageToggle />
           <ThemeToggle />
-          <Button href="/book">
-            {site.booking.primaryCta}
-          </Button>
+          <Button href={localizeHref("/book", locale)}>{site.booking.primaryCta}</Button>
         </div>
         <button
           type="button"
           className="flex h-10 w-10 items-center justify-center rounded-full border border-border md:hidden"
-          aria-label="Toggle menu"
+          aria-label={locale === "fr" ? "Ouvrir le menu" : "Toggle menu"}
           onClick={() => setOpen((prev) => !prev)}
         >
-          <span className="sr-only">Open menu</span>
+          <span className="sr-only">{locale === "fr" ? "Ouvrir le menu" : "Open menu"}</span>
           <svg
             width="20"
             height="20"
@@ -71,11 +75,13 @@ export function Navbar() {
         <div className="border-t border-border bg-background md:hidden">
           <div className="container flex flex-col gap-4 py-6">
             {site.navLinks.map((link) => {
+              const href = localizeHref(link.href, locale);
+
               return (
                 <Link
                   key={link.label}
-                  href={link.href}
-                  className={cn("text-sm font-medium", pathname === link.href && "text-accent")}
+                  href={href}
+                  className={cn("text-sm font-medium", pathname === href && "text-accent")}
                   onClick={() => setOpen(false)}
                 >
                   {link.label}
@@ -83,13 +89,14 @@ export function Navbar() {
               );
             })}
             <div className="flex items-center justify-between">
-              <span className="text-sm font-medium">Theme</span>
+              <span className="text-sm font-medium">{locale === "fr" ? "Langue" : "Language"}</span>
+              <LanguageToggle />
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="text-sm font-medium">{locale === "fr" ? "Theme" : "Theme"}</span>
               <ThemeToggle />
             </div>
-            <Button
-              href="/book"
-              className="justify-center"
-            >
+            <Button href={localizeHref("/book", locale)} className="justify-center">
               {site.booking.primaryCta}
             </Button>
           </div>

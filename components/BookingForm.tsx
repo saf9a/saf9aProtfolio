@@ -1,7 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import { Button } from "@/components/Button";
+import { getLocaleFromPathname } from "@/lib/i18n";
 
 const initialState = {
   name: "",
@@ -18,9 +20,75 @@ const isValidEmail = (email: string) => {
 };
 
 export function BookingForm() {
+  const pathname = usePathname();
+  const locale = getLocaleFromPathname(pathname);
   const [formData, setFormData] = useState(initialState);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
+
+  const copy =
+    locale === "fr"
+      ? {
+          validation:
+            "Merci d'indiquer votre nom, un email valide, le type d'appel et un court brief.",
+          success:
+            "Merci. Nous avons bien recu votre demande et confirmerons le creneau par email sous un jour ouvre.",
+          fallbackError: "Une erreur est survenue.",
+          name: "Nom",
+          email: "Email",
+          company: "Entreprise (optionnel)",
+          callType: "Type d'appel",
+          preferredDate: "Date souhaitee (optionnel)",
+          preferredWindow: "Plage horaire preferee",
+          prepare: "Que devons-nous preparer ?",
+          namePlaceholder: "Votre nom",
+          emailPlaceholder: "vous@entreprise.com",
+          companyPlaceholder: "Entreprise ou projet",
+          callTypePlaceholder: "Choisir un type d'appel",
+          callTypes: [
+            "Appel de decouverte",
+            "Cadrage projet",
+            "Planification DevOps",
+            "Revue automatisation IA",
+            "Consultation generale",
+          ],
+          timeWindows: ["Flexible", "Matin", "Apres-midi", "Fin d'apres-midi"],
+          detailsPlaceholder:
+            "Donnez le contexte, l'objectif de l'appel, le calendrier et ce que vous voulez que nous preparions.",
+          sending: "Envoi...",
+          submit: "Demander un rendez-vous",
+          note: "Nous confirmons les demandes par email sous un jour ouvre.",
+        }
+      : {
+          validation: "Please provide your name, a valid email, call type, and a short brief.",
+          success:
+            "Thanks. We received your booking request and will confirm by email within one business day.",
+          fallbackError: "Something went wrong.",
+          name: "Name",
+          email: "Email",
+          company: "Company (optional)",
+          callType: "Call type",
+          preferredDate: "Preferred date (optional)",
+          preferredWindow: "Preferred time window",
+          prepare: "What should we prepare for?",
+          namePlaceholder: "Your name",
+          emailPlaceholder: "you@company.com",
+          companyPlaceholder: "Company or project",
+          callTypePlaceholder: "Select a call type",
+          callTypes: [
+            "Discovery call",
+            "Project scoping",
+            "DevOps planning",
+            "AI automation review",
+            "General consultation",
+          ],
+          timeWindows: ["Flexible", "Morning", "Afternoon", "Late afternoon"],
+          detailsPlaceholder:
+            "Tell us the goal of the call, context, timeline, and anything you want reviewed.",
+          sending: "Sending...",
+          submit: "Request booking",
+          note: "We confirm bookings by email within one business day.",
+        };
 
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -40,7 +108,7 @@ export function BookingForm() {
       !isValidEmail(formData.email)
     ) {
       setStatus("error");
-      setMessage("Please provide your name, a valid email, call type, and a short brief.");
+      setMessage(copy.validation);
       return;
     }
 
@@ -65,10 +133,10 @@ export function BookingForm() {
       }
 
       setStatus("success");
-      setMessage("Thanks. We received your booking request and will confirm by email within one business day.");
+      setMessage(copy.success);
       setFormData(initialState);
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : "Something went wrong.";
+      const errorMessage = error instanceof Error ? error.message : copy.fallbackError;
       setStatus("error");
       setMessage(errorMessage);
     }
@@ -81,7 +149,7 @@ export function BookingForm() {
       <div className="grid gap-4 md:grid-cols-2">
         <div className="space-y-2">
           <label htmlFor="name" className="text-sm font-medium">
-            Name
+            {copy.name}
           </label>
           <input
             id="name"
@@ -90,13 +158,13 @@ export function BookingForm() {
             value={formData.name}
             onChange={handleChange}
             required
-            className="w-full rounded-2xl border border-border bg-white/80 px-4 py-3 text-sm outline-none focus:border-accent dark:bg-slate-950/60 dark:border-white/10"
-            placeholder="Your name"
+            className="w-full rounded-2xl border border-border bg-white/80 px-4 py-3 text-sm outline-none focus:border-accent dark:border-white/10 dark:bg-slate-950/60"
+            placeholder={copy.namePlaceholder}
           />
         </div>
         <div className="space-y-2">
           <label htmlFor="email" className="text-sm font-medium">
-            Email
+            {copy.email}
           </label>
           <input
             id="email"
@@ -105,15 +173,15 @@ export function BookingForm() {
             value={formData.email}
             onChange={handleChange}
             required
-            className="w-full rounded-2xl border border-border bg-white/80 px-4 py-3 text-sm outline-none focus:border-accent dark:bg-slate-950/60 dark:border-white/10"
-            placeholder="you@company.com"
+            className="w-full rounded-2xl border border-border bg-white/80 px-4 py-3 text-sm outline-none focus:border-accent dark:border-white/10 dark:bg-slate-950/60"
+            placeholder={copy.emailPlaceholder}
           />
         </div>
       </div>
       <div className="grid gap-4 md:grid-cols-2">
         <div className="space-y-2">
           <label htmlFor="company" className="text-sm font-medium">
-            Company (optional)
+            {copy.company}
           </label>
           <input
             id="company"
@@ -121,13 +189,13 @@ export function BookingForm() {
             type="text"
             value={formData.company}
             onChange={handleChange}
-            className="w-full rounded-2xl border border-border bg-white/80 px-4 py-3 text-sm outline-none focus:border-accent dark:bg-slate-950/60 dark:border-white/10"
-            placeholder="Company or project"
+            className="w-full rounded-2xl border border-border bg-white/80 px-4 py-3 text-sm outline-none focus:border-accent dark:border-white/10 dark:bg-slate-950/60"
+            placeholder={copy.companyPlaceholder}
           />
         </div>
         <div className="space-y-2">
           <label htmlFor="service" className="text-sm font-medium">
-            Call type
+            {copy.callType}
           </label>
           <select
             id="service"
@@ -135,21 +203,21 @@ export function BookingForm() {
             value={formData.service}
             onChange={handleChange}
             required
-            className="w-full rounded-2xl border border-border bg-white/80 px-4 py-3 text-sm outline-none focus:border-accent dark:bg-slate-950/60 dark:border-white/10"
+            className="w-full rounded-2xl border border-border bg-white/80 px-4 py-3 text-sm outline-none focus:border-accent dark:border-white/10 dark:bg-slate-950/60"
           >
-            <option value="">Select a call type</option>
-            <option value="Discovery call">Discovery call</option>
-            <option value="Project scoping">Project scoping</option>
-            <option value="DevOps planning">DevOps planning</option>
-            <option value="AI automation review">AI automation review</option>
-            <option value="General consultation">General consultation</option>
+            <option value="">{copy.callTypePlaceholder}</option>
+            {copy.callTypes.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
           </select>
         </div>
       </div>
       <div className="grid gap-4 md:grid-cols-2">
         <div className="space-y-2">
           <label htmlFor="preferredDate" className="text-sm font-medium">
-            Preferred date (optional)
+            {copy.preferredDate}
           </label>
           <input
             id="preferredDate"
@@ -158,30 +226,31 @@ export function BookingForm() {
             min={minDate}
             value={formData.preferredDate}
             onChange={handleChange}
-            className="w-full rounded-2xl border border-border bg-white/80 px-4 py-3 text-sm outline-none focus:border-accent dark:bg-slate-950/60 dark:border-white/10"
+            className="w-full rounded-2xl border border-border bg-white/80 px-4 py-3 text-sm outline-none focus:border-accent dark:border-white/10 dark:bg-slate-950/60"
           />
         </div>
         <div className="space-y-2">
           <label htmlFor="preferredWindow" className="text-sm font-medium">
-            Preferred time window
+            {copy.preferredWindow}
           </label>
           <select
             id="preferredWindow"
             name="preferredWindow"
             value={formData.preferredWindow}
             onChange={handleChange}
-            className="w-full rounded-2xl border border-border bg-white/80 px-4 py-3 text-sm outline-none focus:border-accent dark:bg-slate-950/60 dark:border-white/10"
+            className="w-full rounded-2xl border border-border bg-white/80 px-4 py-3 text-sm outline-none focus:border-accent dark:border-white/10 dark:bg-slate-950/60"
           >
-            <option value="Flexible">Flexible</option>
-            <option value="Morning">Morning</option>
-            <option value="Afternoon">Afternoon</option>
-            <option value="Late afternoon">Late afternoon</option>
+            {copy.timeWindows.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
           </select>
         </div>
       </div>
       <div className="space-y-2">
         <label htmlFor="message" className="text-sm font-medium">
-          What should we prepare for?
+          {copy.prepare}
         </label>
         <textarea
           id="message"
@@ -190,15 +259,15 @@ export function BookingForm() {
           value={formData.message}
           onChange={handleChange}
           required
-          className="w-full rounded-2xl border border-border bg-white/80 px-4 py-3 text-sm outline-none focus:border-accent dark:bg-slate-950/60 dark:border-white/10"
-          placeholder="Tell us the goal of the call, context, timeline, and anything you want reviewed."
+          className="w-full rounded-2xl border border-border bg-white/80 px-4 py-3 text-sm outline-none focus:border-accent dark:border-white/10 dark:bg-slate-950/60"
+          placeholder={copy.detailsPlaceholder}
         />
       </div>
       <div className="flex flex-wrap items-center gap-4">
         <Button type="submit" disabled={status === "loading"}>
-          {status === "loading" ? "Sending..." : "Request booking"}
+          {status === "loading" ? copy.sending : copy.submit}
         </Button>
-        <p className="text-sm text-muted-foreground">We confirm bookings by email within one business day.</p>
+        <p className="text-sm text-muted-foreground">{copy.note}</p>
       </div>
       {status !== "idle" ? (
         <p

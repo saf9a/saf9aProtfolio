@@ -1,7 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import { Button } from "@/components/Button";
+import { getLocaleFromPathname } from "@/lib/i18n";
 
 const initialState = {
   name: "",
@@ -15,9 +17,47 @@ const isValidEmail = (email: string) => {
 };
 
 export function ContactForm() {
+  const pathname = usePathname();
+  const locale = getLocaleFromPathname(pathname);
   const [formData, setFormData] = useState(initialState);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
+
+  const copy =
+    locale === "fr"
+      ? {
+          validation: "Merci d'indiquer votre nom, un email valide et un court message.",
+          success: "Merci. Nous vous repondrons sous un jour ouvre.",
+          fallbackError: "Une erreur est survenue.",
+          name: "Nom",
+          email: "Email",
+          company: "Entreprise (optionnel)",
+          projectDetails: "Details du projet",
+          namePlaceholder: "Votre nom",
+          emailPlaceholder: "vous@entreprise.com",
+          companyPlaceholder: "Entreprise ou projet",
+          detailsPlaceholder:
+            "Parlez-nous de vos objectifs, du calendrier et des resultats attendus.",
+          sending: "Envoi...",
+          submit: "Envoyer le message",
+          note: "Nous repondons sous un jour ouvre.",
+        }
+      : {
+          validation: "Please provide your name, a valid email, and a short message.",
+          success: "Thanks for reaching out. We will reply within one business day.",
+          fallbackError: "Something went wrong.",
+          name: "Name",
+          email: "Email",
+          company: "Company (optional)",
+          projectDetails: "Project details",
+          namePlaceholder: "Your name",
+          emailPlaceholder: "you@company.com",
+          companyPlaceholder: "Company or project",
+          detailsPlaceholder: "Tell us about your goals, timeline, and the outcomes you need.",
+          sending: "Sending...",
+          submit: "Send message",
+          note: "We reply within one business day.",
+        };
 
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -32,7 +72,7 @@ export function ContactForm() {
 
     if (!formData.name.trim() || !formData.message.trim() || !isValidEmail(formData.email)) {
       setStatus("error");
-      setMessage("Please provide your name, a valid email, and a short message.");
+      setMessage(copy.validation);
       return;
     }
 
@@ -54,10 +94,10 @@ export function ContactForm() {
       }
 
       setStatus("success");
-      setMessage("Thanks for reaching out. We will reply within one business day.");
+      setMessage(copy.success);
       setFormData(initialState);
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : "Something went wrong.";
+      const errorMessage = error instanceof Error ? error.message : copy.fallbackError;
       setStatus("error");
       setMessage(errorMessage);
     }
@@ -68,7 +108,7 @@ export function ContactForm() {
       <div className="grid gap-4 md:grid-cols-2">
         <div className="space-y-2">
           <label htmlFor="name" className="text-sm font-medium">
-            Name
+            {copy.name}
           </label>
           <input
             id="name"
@@ -77,13 +117,13 @@ export function ContactForm() {
             value={formData.name}
             onChange={handleChange}
             required
-            className="w-full rounded-2xl border border-border bg-white/80 px-4 py-3 text-sm outline-none focus:border-accent dark:bg-slate-950/60 dark:border-white/10"
-            placeholder="Your name"
+            className="w-full rounded-2xl border border-border bg-white/80 px-4 py-3 text-sm outline-none focus:border-accent dark:border-white/10 dark:bg-slate-950/60"
+            placeholder={copy.namePlaceholder}
           />
         </div>
         <div className="space-y-2">
           <label htmlFor="email" className="text-sm font-medium">
-            Email
+            {copy.email}
           </label>
           <input
             id="email"
@@ -92,14 +132,14 @@ export function ContactForm() {
             value={formData.email}
             onChange={handleChange}
             required
-            className="w-full rounded-2xl border border-border bg-white/80 px-4 py-3 text-sm outline-none focus:border-accent dark:bg-slate-950/60 dark:border-white/10"
-            placeholder="you@company.com"
+            className="w-full rounded-2xl border border-border bg-white/80 px-4 py-3 text-sm outline-none focus:border-accent dark:border-white/10 dark:bg-slate-950/60"
+            placeholder={copy.emailPlaceholder}
           />
         </div>
       </div>
       <div className="space-y-2">
         <label htmlFor="company" className="text-sm font-medium">
-          Company (optional)
+          {copy.company}
         </label>
         <input
           id="company"
@@ -107,13 +147,13 @@ export function ContactForm() {
           type="text"
           value={formData.company}
           onChange={handleChange}
-          className="w-full rounded-2xl border border-border bg-white/80 px-4 py-3 text-sm outline-none focus:border-accent dark:bg-slate-950/60 dark:border-white/10"
-          placeholder="Company or project"
+          className="w-full rounded-2xl border border-border bg-white/80 px-4 py-3 text-sm outline-none focus:border-accent dark:border-white/10 dark:bg-slate-950/60"
+          placeholder={copy.companyPlaceholder}
         />
       </div>
       <div className="space-y-2">
         <label htmlFor="message" className="text-sm font-medium">
-          Project details
+          {copy.projectDetails}
         </label>
         <textarea
           id="message"
@@ -122,15 +162,15 @@ export function ContactForm() {
           value={formData.message}
           onChange={handleChange}
           required
-          className="w-full rounded-2xl border border-border bg-white/80 px-4 py-3 text-sm outline-none focus:border-accent dark:bg-slate-950/60 dark:border-white/10"
-          placeholder="Tell us about your goals, timeline, and the outcomes you need."
+          className="w-full rounded-2xl border border-border bg-white/80 px-4 py-3 text-sm outline-none focus:border-accent dark:border-white/10 dark:bg-slate-950/60"
+          placeholder={copy.detailsPlaceholder}
         />
       </div>
       <div className="flex flex-wrap items-center gap-4">
         <Button type="submit" disabled={status === "loading"}>
-          {status === "loading" ? "Sending..." : "Send message"}
+          {status === "loading" ? copy.sending : copy.submit}
         </Button>
-        <p className="text-sm text-muted-foreground">We reply within one business day.</p>
+        <p className="text-sm text-muted-foreground">{copy.note}</p>
       </div>
       {status !== "idle" ? (
         <p

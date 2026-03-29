@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { Manrope, Sora } from "next/font/google";
 import "./globals.css";
 import { site } from "@/content/site";
+import { DocumentLanguage } from "@/components/DocumentLanguage";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 
@@ -27,6 +28,11 @@ export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   alternates: {
     canonical: "/",
+    languages: {
+      en: "/",
+      fr: "/fr",
+      "x-default": "/",
+    },
   },
   keywords: [
     "Saf9a",
@@ -116,6 +122,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${manrope.variable} ${sora.variable} bg-background text-foreground`}>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <DocumentLanguage />
         <a
           href="#content"
           className="sr-only focus:not-sr-only focus:fixed focus:left-6 focus:top-6 focus:z-50 focus:rounded-full focus:bg-background focus:px-4 focus:py-2 focus:text-sm focus:shadow-soft"
