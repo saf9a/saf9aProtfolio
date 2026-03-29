@@ -42,11 +42,6 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
-  icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    apple: "/favicon-circle.png",
-  },
   openGraph: {
     title: `${site.name} | Web Development, DevOps & AI Automation in Tunisia`,
     description: site.description,
