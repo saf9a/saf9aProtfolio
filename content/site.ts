@@ -62,15 +62,15 @@ export const site = {
   location: "Tunis, Tunisia",
   email: "dslimmp@gmail.com",
   description:
-    "A studio in Tunis delivering full-stack web products, DevOps foundations, and AI automation that help teams ship faster and operate with confidence.",
+    "Saf9a is a Tunis, Tunisia studio for web development, DevOps, and AI automation, helping startups and scaleups ship faster across MENA and Europe.",
   hero: {
     kicker: "Full-stack studio",
-    headline: "Premium web, cloud, and AI automation for teams that need to ship fast.",
+    headline: "Web development, DevOps, and AI automation for teams that need to ship fast.",
     subheadline:
-      "We build modern web products, reliable infrastructure, and practical AI workflows so your team can move faster without piling on tech debt.",
+      "We build modern web products, reliable cloud infrastructure, and practical AI automation so startups and scaleups can move faster without piling on tech debt.",
     primaryCta: "Request a call",
     secondaryCta: "View case studies",
-    note: "Based in Tunis, serving startups and scaleups across MENA and Europe.",
+    note: "Based in Tunis, Tunisia, serving startups and scaleups across MENA and Europe.",
     sideTitle: "What a launch looks like",
     sideDescription:
       "A clear plan, fast execution, and operational polish so your product feels credible from day one.",
@@ -83,12 +83,12 @@ export const site = {
   contact: {
     headline: "Start with a short call",
     description:
-      "Tell us about the outcome you want. We will respond within one business day with next steps and a tailored plan.",
+      "Talk with Saf9a about web development, DevOps, or AI automation. We reply within one business day with next steps and a tailored plan.",
   },
   booking: {
     headline: "Request a custom booking",
     description:
-      "Share your goals, the type of call you need, and a preferred time window. We will confirm the best slot by email within one business day.",
+      "Share your goals, the type of call you need, and a preferred time window. We will confirm the best slot by email within one business day for your web development, DevOps, or AI automation needs.",
     primaryCta: "Request a call",
   },
   navLinks: [
@@ -419,7 +419,7 @@ export const site = {
     x: "https://x.com/<x>",
   },
   workIntro:
-    "A selection of recent projects showing how we solve complex product, infrastructure, and automation challenges.",
+    "Case studies showing how Saf9a delivers web development, DevOps, and AI automation projects for product and operations teams.",
   servicesIntro:
-    "Productized offers with clear timelines and deliverables so you know exactly what you are getting.",
+    "Web development, DevOps consulting, and AI automation services from Tunis, Tunisia with clear timelines and deliverables.",
 } as const;

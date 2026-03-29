@@ -2,16 +2,19 @@ import type { Metadata } from "next";
 import { Section } from "@/components/Section";
 import { SectionHeading } from "@/components/SectionHeading";
 import { site } from "@/content/site";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: `Privacy | ${site.name}`,
-  description: "Privacy policy for site visitors and contacts.",
-};
+export const metadata: Metadata = buildPageMetadata({
+  title: "Privacy Policy",
+  description: "Privacy policy for Saf9a site visitors, contact requests, and booking requests.",
+  path: "/privacy",
+});
 
 export default function PrivacyPage() {
   return (
     <Section>
       <SectionHeading
+        as="h1"
         overline="Privacy"
         title="Privacy policy"
         description="We respect your privacy and keep data collection to a minimum."

@@ -20,18 +20,35 @@ const sora = Sora({
 
 export const metadata: Metadata = {
   title: {
-    default: `${site.name} | Full-stack, DevOps, AI automation`,
+    default: `${site.name} | Web Development, DevOps & AI Automation in Tunisia`,
     template: `%s | ${site.name}`,
   },
   description: site.description,
   metadataBase: new URL(site.url),
+  alternates: {
+    canonical: "/",
+  },
+  keywords: [
+    "Saf9a",
+    "web development Tunisia",
+    "web development Tunis",
+    "DevOps Tunisia",
+    "AI automation Tunisia",
+    "web development studio Tunis",
+    "DevOps consulting",
+    "AI automation services",
+  ],
+  robots: {
+    index: true,
+    follow: true,
+  },
   icons: {
     icon: "/favicon-circle.png",
     shortcut: "/favicon-circle.png",
     apple: "/favicon-circle.png",
   },
   openGraph: {
-    title: site.name,
+    title: `${site.name} | Web Development, DevOps & AI Automation in Tunisia`,
     description: site.description,
     url: site.url,
     siteName: site.name,
@@ -45,25 +62,44 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: site.name,
+    title: `${site.name} | Web Development, DevOps & AI Automation in Tunisia`,
     description: site.description,
+    images: ["/opengraph-image"],
   },
 };
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  name: site.name,
-  url: site.url,
-  email: site.email,
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "Tunis",
-    addressCountry: "TN",
-  },
-  areaServed: ["Tunisia", "MENA", "Europe"],
-  sameAs: [site.socials.linkedin, site.socials.github].filter(Boolean),
-  description: site.description,
+  "@graph": [
+    {
+      "@type": "Organization",
+      name: site.name,
+      url: site.url,
+      email: site.email,
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Tunis",
+        addressCountry: "TN",
+      },
+      areaServed: ["Tunisia", "MENA", "Europe"],
+      sameAs: [site.socials.linkedin, site.socials.github].filter(Boolean),
+      description: site.description,
+    },
+    {
+      "@type": "ProfessionalService",
+      name: site.name,
+      url: site.url,
+      email: site.email,
+      areaServed: ["Tunisia", "MENA", "Europe"],
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Tunis",
+        addressCountry: "TN",
+      },
+      description: site.description,
+      serviceType: ["Web development", "DevOps consulting", "AI automation"],
+    },
+  ],
 };
 
 const themeScript = `(() => {

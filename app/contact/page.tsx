@@ -4,11 +4,15 @@ import { Section } from "@/components/Section";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ContactForm } from "@/components/ContactForm";
 import { Button } from "@/components/Button";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: `Contact | ${site.name}`,
-  description: site.contact.description,
-};
+export const metadata: Metadata = buildPageMetadata({
+  title: "Contact Saf9a",
+  description:
+    "Contact Saf9a in Tunis, Tunisia about web development, DevOps, and AI automation projects.",
+  path: "/contact",
+  keywords: ["contact Saf9a", "Tunis web development contact", "DevOps Tunisia contact"],
+});
 
 export default function ContactPage() {
   return (
@@ -16,8 +20,9 @@ export default function ContactPage() {
       <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr]">
         <div>
           <SectionHeading
+            as="h1"
             overline="Contact"
-            title={site.contact.headline}
+            title="Contact Saf9a in Tunis"
             description={site.contact.description}
           />
           <div className="mt-8">

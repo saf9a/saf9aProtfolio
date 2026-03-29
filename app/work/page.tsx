@@ -3,19 +3,24 @@ import { site } from "@/content/site";
 import { Section } from "@/components/Section";
 import { SectionHeading } from "@/components/SectionHeading";
 import { Button } from "@/components/Button";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: `Work | ${site.name}`,
-  description: site.workIntro,
-};
+export const metadata: Metadata = buildPageMetadata({
+  title: "Case Studies in Web Development, DevOps & AI Automation",
+  description:
+    "See how Saf9a delivers web development, DevOps, and AI automation projects with measurable business results.",
+  path: "/work",
+  keywords: ["web development case studies", "DevOps case studies", "AI automation projects", "Saf9a work"],
+});
 
 export default function WorkPage() {
   return (
     <>
       <Section>
         <SectionHeading
+          as="h1"
           overline="Case studies"
-          title="Results-driven delivery"
+          title="Case studies in web development, DevOps, and AI automation"
           description={site.workIntro}
         />
       </Section>

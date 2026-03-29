@@ -5,6 +5,7 @@ type SectionHeadingProps = {
   title: string;
   description?: string;
   align?: "left" | "center";
+  as?: "h1" | "h2";
 };
 
 export function SectionHeading({
@@ -12,7 +13,10 @@ export function SectionHeading({
   title,
   description,
   align = "left",
+  as = "h2",
 }: SectionHeadingProps) {
+  const HeadingTag = as;
+
   return (
     <div className={cn("space-y-3", align === "center" && "text-center")}>
       {overline ? (
@@ -20,7 +24,9 @@ export function SectionHeading({
           {overline}
         </p>
       ) : null}
-      <h2 className="text-3xl font-semibold text-balance md:text-4xl">{title}</h2>
+      <HeadingTag className="text-3xl font-semibold text-balance md:text-4xl">
+        {title}
+      </HeadingTag>
       {description ? (
         <p
           className={cn(

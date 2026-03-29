@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { site } from "@/content/site";
 import { Button } from "@/components/Button";
@@ -9,6 +10,33 @@ import { ProcessSteps } from "@/components/ProcessSteps";
 import { TestimonialCard } from "@/components/TestimonialCard";
 import { CaseStudyCard } from "@/components/CaseStudyCard";
 import { FAQItem } from "@/components/FAQItem";
+import { buildPageMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = buildPageMetadata({
+  title: "Web Development, DevOps & AI Automation in Tunisia",
+  description: site.description,
+  path: "/",
+  keywords: [
+    "Saf9a",
+    "web development Tunisia",
+    "DevOps Tunisia",
+    "AI automation Tunisia",
+    "web development studio Tunis",
+  ],
+});
+
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: site.faqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.answer,
+    },
+  })),
+};
 
 export default function HomePage() {
   return (
@@ -234,6 +262,10 @@ export default function HomePage() {
           </div>
         </div>
       </Section>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
     </>
   );
 }

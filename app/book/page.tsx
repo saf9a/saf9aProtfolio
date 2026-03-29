@@ -3,11 +3,15 @@ import { site } from "@/content/site";
 import { Section } from "@/components/Section";
 import { SectionHeading } from "@/components/SectionHeading";
 import { BookingForm } from "@/components/BookingForm";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: `Book | ${site.name}`,
-  description: site.booking.description,
-};
+export const metadata: Metadata = buildPageMetadata({
+  title: "Request a Call",
+  description:
+    "Request a call with Saf9a for web development, DevOps, or AI automation projects and planning.",
+  path: "/book",
+  keywords: ["request a call Saf9a", "book web development consultation", "DevOps consultation Tunisia"],
+});
 
 export default function BookPage() {
   return (
@@ -15,6 +19,7 @@ export default function BookPage() {
       <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr]">
         <div>
           <SectionHeading
+            as="h1"
             overline="Booking"
             title={site.booking.headline}
             description={site.booking.description}

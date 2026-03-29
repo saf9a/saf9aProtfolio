@@ -3,20 +3,30 @@ import { site } from "@/content/site";
 import { Section } from "@/components/Section";
 import { SectionHeading } from "@/components/SectionHeading";
 import { Button } from "@/components/Button";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: `Services | ${site.name}`,
-  description: site.servicesIntro,
-};
+export const metadata: Metadata = buildPageMetadata({
+  title: "Web Development, DevOps & AI Automation Services",
+  description:
+    "Explore Saf9a services for web development, DevOps consulting, and AI automation from Tunis, Tunisia.",
+  path: "/services",
+  keywords: [
+    "web development services Tunisia",
+    "DevOps consulting Tunisia",
+    "AI automation services Tunisia",
+    "Tunis software studio",
+  ],
+});
 
 export default function ServicesPage() {
   return (
     <>
       <Section>
         <SectionHeading
+          as="h1"
           overline="Services"
-          title="Productized offers with clear outcomes"
-          description={site.servicesIntro}
+          title="Web development, DevOps, and AI automation services"
+          description="Founder-led delivery from Tunis, Tunisia with clear scopes, fast timelines, and production-ready execution."
         />
       </Section>
       <Section className="bg-muted/30">

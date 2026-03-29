@@ -2,19 +2,24 @@ import type { Metadata } from "next";
 import { site } from "@/content/site";
 import { Section } from "@/components/Section";
 import { SectionHeading } from "@/components/SectionHeading";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: `About | ${site.name}`,
-  description: site.about.mission,
-};
+export const metadata: Metadata = buildPageMetadata({
+  title: "About Saf9a",
+  description:
+    "Meet Saf9a, a Tunis, Tunisia studio offering web development, DevOps, and AI automation with direct founder-led delivery.",
+  path: "/about",
+  keywords: ["about Saf9a", "Tunis web development studio", "DevOps Tunisia", "AI automation Tunisia"],
+});
 
 export default function AboutPage() {
   return (
     <>
       <Section>
         <SectionHeading
+          as="h1"
           overline="About"
-          title="A studio with senior expertise"
+          title="About Saf9a, a Tunis software studio"
           description={site.about.mission}
         />
         <p className="mt-6 max-w-3xl text-sm text-muted-foreground">{site.about.story}</p>
