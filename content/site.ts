@@ -125,7 +125,7 @@ export type SiteContent = {
 
 export const site: SiteContent = {
   name: "Saf9a",
-  url: "https://saf9a.vercel.app",
+  url: "https://saf9a.tech",
   location: "Tunis, Tunisia",
   email: "dslimmp@gmail.com",
   description:
@@ -493,7 +493,7 @@ export const site: SiteContent = {
 
 export const siteFr: SiteContent = {
   name: "Saf9a",
-  url: "https://saf9a.vercel.app",
+  url: "https://saf9a.tech",
   location: "Tunis, Tunisie",
   email: "dslimmp@gmail.com",
   description:
