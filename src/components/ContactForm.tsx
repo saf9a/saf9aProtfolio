@@ -117,7 +117,7 @@ export function ContactForm() {
             value={formData.name}
             onChange={handleChange}
             required
-            className="w-full rounded-2xl border border-border bg-white/80 px-4 py-3 text-sm outline-none focus:border-accent dark:border-white/10 dark:bg-slate-950/60"
+            className="input-field"
             placeholder={copy.namePlaceholder}
           />
         </div>
@@ -132,7 +132,7 @@ export function ContactForm() {
             value={formData.email}
             onChange={handleChange}
             required
-            className="w-full rounded-2xl border border-border bg-white/80 px-4 py-3 text-sm outline-none focus:border-accent dark:border-white/10 dark:bg-slate-950/60"
+            className="input-field"
             placeholder={copy.emailPlaceholder}
           />
         </div>
@@ -147,7 +147,7 @@ export function ContactForm() {
           type="text"
           value={formData.company}
           onChange={handleChange}
-          className="w-full rounded-2xl border border-border bg-white/80 px-4 py-3 text-sm outline-none focus:border-accent dark:border-white/10 dark:bg-slate-950/60"
+          className="input-field"
           placeholder={copy.companyPlaceholder}
         />
       </div>
@@ -162,7 +162,7 @@ export function ContactForm() {
           value={formData.message}
           onChange={handleChange}
           required
-          className="w-full rounded-2xl border border-border bg-white/80 px-4 py-3 text-sm outline-none focus:border-accent dark:border-white/10 dark:bg-slate-950/60"
+          className="input-field min-h-36 resize-y"
           placeholder={copy.detailsPlaceholder}
         />
       </div>
@@ -175,7 +175,7 @@ export function ContactForm() {
       {status !== "idle" ? (
         <p
           className={
-            status === "success" ? "text-sm text-emerald-600" : "text-sm text-red-600"
+            status === "success" ? "text-sm text-success" : "text-sm text-red-600"
           }
           role="status"
           aria-live="polite"

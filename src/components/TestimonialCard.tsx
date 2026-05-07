@@ -7,11 +7,12 @@ type TestimonialCardProps = {
 
 export function TestimonialCard({ quote, name, role, company }: TestimonialCardProps) {
   return (
-    <div className="rounded-3xl border border-border bg-white/70 p-6 shadow-soft dark:bg-slate-900/60 dark:border-white/10">
-      <p className="text-sm text-foreground/80">
+    <div className="h-full rounded-lg border border-border bg-surface/75 p-6 shadow-soft backdrop-blur-xl">
+      <p className="text-base leading-7 text-foreground/80">
         &ldquo;{quote}&rdquo;
       </p>
-      <div className="mt-6 text-sm font-semibold">{name}</div>
+      <div className="mt-8 h-px w-14 bg-accent/70" />
+      <div className="mt-5 text-sm font-semibold">{name}</div>
       <div className="text-xs text-muted-foreground">
         {role}, {company}
       </div>

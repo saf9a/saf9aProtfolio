@@ -12,13 +12,14 @@ type ButtonProps = {
   AnchorHTMLAttributes<HTMLAnchorElement>;
 
 const baseStyles =
-  "inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background";
+  "group inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background";
 
 const variants = {
-  primary: "bg-accent text-accent-foreground shadow-soft hover:opacity-90",
+  primary:
+    "bg-foreground text-background shadow-lift hover:-translate-y-0.5 hover:bg-foreground/90 dark:bg-accent dark:text-accent-foreground dark:hover:bg-accent/90",
   secondary:
-    "border border-border bg-white/80 backdrop-blur hover:border-foreground/30 dark:bg-slate-900/70 dark:border-white/10 dark:hover:border-white/30",
-  ghost: "text-foreground/80 hover:text-foreground",
+    "border border-border bg-surface/80 backdrop-blur hover:-translate-y-0.5 hover:border-foreground/25 hover:bg-surface dark:hover:border-white/30",
+  ghost: "text-foreground/75 hover:text-foreground hover:bg-foreground/5",
 };
 
 const sizes = {

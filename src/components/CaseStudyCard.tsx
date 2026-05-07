@@ -9,11 +9,11 @@ type CaseStudyCardProps = {
 
 export function CaseStudyCard({ title, summary, industry, metrics }: CaseStudyCardProps) {
   return (
-    <div className="rounded-3xl border border-border bg-white/70 p-6 shadow-soft dark:bg-slate-900/60 dark:border-white/10">
-      <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">{industry}</p>
-      <h3 className="mt-3 text-xl font-semibold">{title}</h3>
-      <p className="mt-3 text-sm text-muted-foreground">{summary}</p>
-      <ul className="mt-4 space-y-2 text-sm text-foreground/80">
+    <div className="group flex h-full flex-col rounded-lg border border-border bg-surface/75 p-6 shadow-soft backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-accent/35 hover:shadow-lift">
+      <p className="text-xs font-semibold uppercase tracking-[0.24em] text-accent">{industry}</p>
+      <h3 className="mt-4 text-xl font-semibold leading-snug">{title}</h3>
+      <p className="mt-3 text-sm leading-6 text-muted-foreground">{summary}</p>
+      <ul className="mt-5 space-y-2 text-sm text-foreground/80">
         {metrics.map((metric) => (
           <li key={metric} className="flex items-center gap-2">
             <span className="h-1.5 w-1.5 rounded-full bg-accent" />
@@ -23,10 +23,9 @@ export function CaseStudyCard({ title, summary, industry, metrics }: CaseStudyCa
       </ul>
       <Link
         href="/work"
-        className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-accent"
+        className="mt-auto inline-flex pt-6 text-sm font-semibold text-accent transition group-hover:translate-x-1"
       >
         View full case study
-        <span aria-hidden>→</span>
       </Link>
     </div>
   );

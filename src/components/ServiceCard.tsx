@@ -6,13 +6,14 @@ type ServiceCardProps = {
 
 export function ServiceCard({ title, description, bullets }: ServiceCardProps) {
   return (
-    <div className="rounded-3xl border border-border bg-white/70 p-6 shadow-soft backdrop-blur dark:bg-slate-900/60 dark:border-white/10">
-      <h3 className="text-xl font-semibold">{title}</h3>
-      <p className="mt-3 text-sm text-muted-foreground">{description}</p>
-      <ul className="mt-5 space-y-2 text-sm text-foreground/80">
+    <div className="group h-full rounded-lg border border-border bg-surface/75 p-6 shadow-soft backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-accent/35 hover:shadow-lift">
+      <div className="mb-6 h-px w-16 bg-gradient-to-r from-accent to-success transition group-hover:w-24" />
+      <h3 className="text-xl font-semibold leading-snug">{title}</h3>
+      <p className="mt-3 text-sm leading-6 text-muted-foreground">{description}</p>
+      <ul className="mt-6 space-y-3 text-sm text-foreground/75">
         {bullets.map((bullet) => (
           <li key={bullet} className="flex items-start gap-2">
-            <span className="mt-1 h-2 w-2 rounded-full bg-accent" />
+            <span className="mt-2 h-1.5 w-1.5 rounded-full bg-accent" />
             <span>{bullet}</span>
           </li>
         ))}

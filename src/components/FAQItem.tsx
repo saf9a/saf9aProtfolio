@@ -13,7 +13,7 @@ export function FAQItem({ question, answer }: FAQItemProps) {
   const contentId = useId();
 
   return (
-    <div className="rounded-2xl border border-border bg-white/60 p-5 dark:bg-slate-900/60 dark:border-white/10">
+    <div className="rounded-lg border border-border bg-surface/75 p-5 shadow-soft backdrop-blur-xl">
       <button
         type="button"
         onClick={() => setOpen((prev) => !prev)}

@@ -6,6 +6,7 @@ import { site } from "@/content/site";
 import { DocumentLanguage } from "@/components/DocumentLanguage";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { ScrollProgress } from "@/components/ScrollProgress";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -121,6 +122,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${manrope.variable} ${sora.variable} bg-background text-foreground`}>
+        <ScrollProgress />
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <DocumentLanguage />
         <a

@@ -18,20 +18,20 @@ export function SectionHeading({
   const HeadingTag = as;
 
   return (
-    <div className={cn("space-y-3", align === "center" && "text-center")}>
+    <div className={cn("space-y-4", align === "center" && "text-center")}>
       {overline ? (
-        <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
+        <p className="text-xs font-semibold uppercase tracking-[0.28em] text-accent">
           {overline}
         </p>
       ) : null}
-      <HeadingTag className="text-3xl font-semibold text-balance md:text-4xl">
+      <HeadingTag className="max-w-4xl text-3xl font-semibold leading-tight text-balance md:text-5xl">
         {title}
       </HeadingTag>
       {description ? (
         <p
           className={cn(
-            "text-muted-foreground",
-            align === "center" ? "mx-auto max-w-2xl" : "max-w-2xl"
+            "text-base leading-7 text-muted-foreground md:text-lg",
+            align === "center" ? "mx-auto max-w-2xl" : "max-w-3xl"
           )}
         >
           {description}

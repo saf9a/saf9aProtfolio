@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { site } from "@/content/site";
 import { Section } from "@/components/Section";
-import { SectionHeading } from "@/components/SectionHeading";
-import { Button } from "@/components/Button";
+import { PageHero } from "@/components/PageHero";
+import { UnifiedCta } from "@/components/UnifiedCta";
 import { buildPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildPageMetadata({
@@ -21,79 +21,80 @@ export const metadata: Metadata = buildPageMetadata({
 export default function ServicesPage() {
   return (
     <>
-      <Section>
-        <SectionHeading
-          as="h1"
+      <PageHero
+          variant="services"
           overline="Services"
-          title="Web development, DevOps, and AI automation services"
+          title="Product, cloud, and AI delivery in one system."
           description="Founder-led delivery from Tunis, Tunisia with clear scopes, fast timelines, and production-ready execution."
-        />
-      </Section>
-      <Section className="bg-muted/30">
-        <div className="grid gap-6 lg:grid-cols-2">
-          {site.offers.map((offer) => (
+          primaryLabel={site.booking.primaryCta}
+          primaryHref="/book"
+          secondaryLabel="Talk to us"
+          secondaryHref="/contact"
+      />
+      <Section className="pt-8">
+        <div className="grid gap-4 lg:grid-cols-2">
+          {site.offers.map((offer, index) => (
             <div
               key={offer.name}
-              className="rounded-3xl border border-border bg-white/70 p-8 shadow-soft dark:bg-slate-900/60 dark:border-white/10"
+              className="rounded-lg border border-border bg-surface/75 p-6 shadow-soft backdrop-blur-xl md:p-8"
             >
               <div className="flex flex-wrap items-start justify-between gap-4">
                 <div>
-                  <h2 className="text-xl font-semibold">{offer.name}</h2>
-                  <p className="mt-2 text-sm text-muted-foreground">{offer.summary}</p>
+                  <p className="text-xs font-semibold uppercase tracking-[0.24em] text-accent">
+                    0{index + 1}
+                  </p>
+                  <h2 className="mt-3 text-2xl font-semibold">{offer.name}</h2>
+                  <p className="mt-3 text-sm leading-6 text-muted-foreground">{offer.summary}</p>
                 </div>
                 <div className="text-right text-sm">
                   <p className="font-semibold text-accent">{offer.price}</p>
                   <p className="text-muted-foreground">{offer.timeline}</p>
                 </div>
               </div>
-              <div className="mt-6 grid gap-6 md:grid-cols-2">
+              <div className="mt-7 grid gap-6 md:grid-cols-2">
                 <div>
-                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
+                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-foreground">
                     What you get
                   </p>
-                  <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
+                  <ul className="mt-4 space-y-3 text-sm leading-6 text-muted-foreground">
                     {offer.whatYouGet.map((item) => (
                       <li key={item} className="flex items-start gap-2">
-                        <span className="mt-1 h-2 w-2 rounded-full bg-accent" />
+                        <span className="mt-2 h-1.5 w-1.5 rounded-full bg-accent" />
                         <span>{item}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
                 <div>
-                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
+                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-foreground">
                     Timeline
                   </p>
-                  <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
+                  <ul className="mt-4 space-y-3 text-sm leading-6 text-muted-foreground">
                     {offer.timelineSteps.map((item) => (
                       <li key={item} className="flex items-start gap-2">
-                        <span className="mt-1 h-2 w-2 rounded-full bg-accent" />
+                        <span className="mt-2 h-1.5 w-1.5 rounded-full bg-success" />
                         <span>{item}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
               </div>
-              <p className="mt-6 text-sm text-muted-foreground">Ideal for: {offer.idealFor}</p>
+              <p className="mt-7 rounded-lg border border-border bg-background/50 p-4 text-sm leading-6 text-muted-foreground">
+                Ideal for: {offer.idealFor}
+              </p>
             </div>
           ))}
         </div>
       </Section>
-      <Section>
-        <div className="rounded-3xl border border-border bg-white/70 p-8 text-center dark:bg-slate-900/60 dark:border-white/10">
-          <h2 className="text-2xl font-semibold">Not sure which offer fits?</h2>
-          <p className="mt-3 text-sm text-muted-foreground">
-            We can help you choose the right scope in a 20-minute discovery call.
-          </p>
-          <div className="mt-6 flex flex-wrap justify-center gap-4">
-            <Button href="/book">
-              {site.booking.primaryCta}
-            </Button>
-            <Button href="/contact" variant="secondary">
-              Contact us
-            </Button>
-          </div>
-        </div>
+      <Section className="pt-8">
+        <UnifiedCta
+          headline="Not sure which offer fits?"
+          description="We can help you choose the right scope in a 20-minute discovery call."
+          primaryLabel={site.booking.primaryCta}
+          primaryHref="/book"
+          secondaryLabel="Contact us"
+          secondaryHref="/contact"
+        />
       </Section>
     </>
   );

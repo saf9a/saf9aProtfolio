@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { siteFr } from "@/content/site";
 import { Section } from "@/components/Section";
-import { SectionHeading } from "@/components/SectionHeading";
-import { Button } from "@/components/Button";
+import { PageHero } from "@/components/PageHero";
+import { CaseStudyVisual } from "@/components/CaseStudyVisual";
+import { UnifiedCta } from "@/components/UnifiedCta";
 import { buildPageMetadata } from "@/lib/seo";
-import { localizeHref } from "@/lib/i18n";
 
 const locale = "fr" as const;
 
@@ -20,47 +20,49 @@ export const metadata: Metadata = buildPageMetadata({
 export default function WorkPageFr() {
   return (
     <>
-      <Section>
-        <SectionHeading
-          as="h1"
-          overline="Etudes de cas"
-          title="Etudes de cas en developpement web, DevOps et automatisation IA"
-          description={siteFr.workIntro}
-        />
-      </Section>
+      <PageHero
+        variant="work"
+        overline="Etudes de cas"
+        title="La preuve que le systeme livre."
+        description={siteFr.workIntro}
+        primaryLabel={siteFr.booking.primaryCta}
+        primaryHref="/fr/book"
+        secondaryLabel="Voir les services"
+        secondaryHref="/fr/services"
+      />
       {siteFr.caseStudies.map((study, index) => (
-        <Section key={study.slug} className={index % 2 === 1 ? "bg-muted/30" : ""}>
+        <Section key={study.slug} className="pt-8">
           <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
             <div className="space-y-6">
               <div>
-                <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
+                <p className="text-xs font-semibold uppercase tracking-[0.24em] text-accent">
                   {study.industry}
                 </p>
-                <h2 className="mt-3 text-2xl font-semibold">{study.title}</h2>
-                <p className="mt-3 text-sm text-muted-foreground">{study.summary}</p>
+                <h2 className="mt-4 text-3xl font-semibold leading-tight">{study.title}</h2>
+                <p className="mt-4 text-base leading-7 text-muted-foreground">{study.summary}</p>
               </div>
               <div className="space-y-4">
-                <div>
+                <div className="rounded-lg border border-border bg-surface/75 p-5 shadow-soft backdrop-blur-xl">
                   <p className="text-sm font-semibold">Probleme</p>
-                  <p className="mt-2 text-sm text-muted-foreground">{study.problem}</p>
+                  <p className="mt-2 text-sm leading-6 text-muted-foreground">{study.problem}</p>
                 </div>
-                <div>
+                <div className="rounded-lg border border-border bg-surface/75 p-5 shadow-soft backdrop-blur-xl">
                   <p className="text-sm font-semibold">Solution</p>
-                  <ul className="mt-2 space-y-2 text-sm text-muted-foreground">
+                  <ul className="mt-3 space-y-2 text-sm leading-6 text-muted-foreground">
                     {study.solution.map((item) => (
                       <li key={item} className="flex items-start gap-2">
-                        <span className="mt-1 h-2 w-2 rounded-full bg-accent" />
+                        <span className="mt-2 h-1.5 w-1.5 rounded-full bg-accent" />
                         <span>{item}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
-                <div>
+                <div className="rounded-lg border border-border bg-surface/75 p-5 shadow-soft backdrop-blur-xl">
                   <p className="text-sm font-semibold">Resultats</p>
-                  <ul className="mt-2 space-y-2 text-sm text-muted-foreground">
+                  <ul className="mt-3 space-y-2 text-sm leading-6 text-muted-foreground">
                     {study.results.map((item) => (
                       <li key={item} className="flex items-start gap-2">
-                        <span className="mt-1 h-2 w-2 rounded-full bg-accent" />
+                        <span className="mt-2 h-1.5 w-1.5 rounded-full bg-success" />
                         <span>{item}</span>
                       </li>
                     ))}
@@ -68,21 +70,21 @@ export default function WorkPageFr() {
                 </div>
               </div>
               <div className="grid gap-4 sm:grid-cols-2">
-                <div className="rounded-2xl border border-border bg-white/70 p-4 dark:border-white/10 dark:bg-slate-900/60">
-                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
+                <div className="rounded-lg border border-border bg-surface/75 p-4 shadow-soft backdrop-blur-xl">
+                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-accent">
                     Calendrier
                   </p>
                   <p className="mt-2 text-sm font-semibold">{study.timeline}</p>
                 </div>
-                <div className="rounded-2xl border border-border bg-white/70 p-4 dark:border-white/10 dark:bg-slate-900/60">
-                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
+                <div className="rounded-lg border border-border bg-surface/75 p-4 shadow-soft backdrop-blur-xl">
+                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-accent">
                     Stack technique
                   </p>
                   <p className="mt-2 text-sm font-semibold">{study.stack.join(", ")}</p>
                 </div>
               </div>
-              <div className="rounded-2xl border border-border bg-white/70 p-4 dark:border-white/10 dark:bg-slate-900/60">
-                <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Impact</p>
+              <div className="rounded-lg border border-border bg-surface/75 p-4 shadow-soft backdrop-blur-xl">
+                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-accent">Impact</p>
                 <div className="mt-3 flex flex-wrap gap-2">
                   {study.metrics.map((metric) => (
                     <span
@@ -95,30 +97,21 @@ export default function WorkPageFr() {
                 </div>
               </div>
             </div>
-            <div className="space-y-4">
-              <div className="aspect-[4/3] rounded-3xl border border-border bg-muted/40 p-6 text-sm text-muted-foreground">
-                Apercu projet
-              </div>
-              <div className="aspect-[4/3] rounded-3xl border border-border bg-muted/40 p-6 text-sm text-muted-foreground">
-                Apercu dashboard
-              </div>
+            <div className={index % 2 === 1 ? "lg:order-first" : ""}>
+              <CaseStudyVisual metrics={study.metrics} stack={study.stack} />
             </div>
           </div>
         </Section>
       ))}
-      <Section>
-        <div className="rounded-3xl border border-border bg-white/70 p-8 text-center dark:border-white/10 dark:bg-slate-900/60">
-          <h2 className="text-2xl font-semibold">Vous voulez construire quelque chose de similaire ?</h2>
-          <p className="mt-3 text-sm text-muted-foreground">
-            Parlez-nous de votre projet et nous vous proposerons la meilleure approche.
-          </p>
-          <div className="mt-6 flex flex-wrap justify-center gap-4">
-            <Button href={localizeHref("/book", locale)}>{siteFr.booking.primaryCta}</Button>
-            <Button href={localizeHref("/contact", locale)} variant="secondary">
-              Nous contacter
-            </Button>
-          </div>
-        </div>
+      <Section className="pt-8">
+        <UnifiedCta
+          headline="Vous voulez construire quelque chose de similaire ?"
+          description="Parlez-nous de votre projet et nous vous proposerons la meilleure approche."
+          primaryLabel={siteFr.booking.primaryCta}
+          primaryHref="/fr/book"
+          secondaryLabel="Nous contacter"
+          secondaryHref="/fr/contact"
+        />
       </Section>
     </>
   );

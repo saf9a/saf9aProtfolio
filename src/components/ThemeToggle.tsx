@@ -33,7 +33,7 @@ export function ThemeToggle({ className }: { className?: string }) {
       type="button"
       onClick={toggleTheme}
       className={cn(
-        "inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-white/80 text-sm transition hover:border-foreground/30 dark:bg-slate-900/70 dark:border-white/10",
+        "inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-surface/80 text-sm shadow-soft backdrop-blur transition hover:border-foreground/30",
         className
       )}
       aria-label={locale === "fr" ? "Changer le theme" : "Toggle theme"}

@@ -14,7 +14,7 @@ export function LanguageToggle({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "inline-flex items-center rounded-full border border-border bg-white/80 p-1 text-xs font-semibold dark:bg-slate-900/70 dark:border-white/10",
+        "inline-flex items-center rounded-full border border-border bg-surface/80 p-1 text-xs font-semibold shadow-soft backdrop-blur",
         className
       )}
       aria-label={locale === "fr" ? "Changer de langue" : "Change language"}

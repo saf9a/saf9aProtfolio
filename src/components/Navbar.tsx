@@ -21,12 +21,12 @@ export function Navbar() {
   }, [pathname]);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur">
-      <div className="container flex items-center justify-between py-4">
+    <header className="sticky top-0 z-50 border-b border-border/70 bg-background/75 backdrop-blur-2xl">
+      <div className="container flex items-center justify-between py-3">
         <Link href={localizeHref("/", locale)} className="flex items-center">
           <Logo />
         </Link>
-        <nav className="hidden items-center gap-8 md:flex" aria-label="Primary">
+        <nav className="hidden items-center gap-1 rounded-full border border-border/80 bg-surface/70 p-1 shadow-soft md:flex" aria-label="Primary">
           {site.navLinks.map((link) => {
             const href = localizeHref(link.href, locale);
             const isActive = pathname === href;
@@ -36,8 +36,8 @@ export function Navbar() {
                 key={link.label}
                 href={href}
                 className={cn(
-                  "text-sm font-medium transition hover:text-accent",
-                  isActive && "text-accent"
+                  "rounded-full px-4 py-2 text-sm font-medium text-muted-foreground transition hover:bg-foreground/5 hover:text-foreground",
+                  isActive && "bg-foreground text-background hover:bg-foreground hover:text-background"
                 )}
               >
                 {link.label}
@@ -52,7 +52,7 @@ export function Navbar() {
         </div>
         <button
           type="button"
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-border md:hidden"
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-surface/80 md:hidden"
           aria-label={locale === "fr" ? "Ouvrir le menu" : "Toggle menu"}
           onClick={() => setOpen((prev) => !prev)}
         >
@@ -72,7 +72,7 @@ export function Navbar() {
         </button>
       </div>
       {open ? (
-        <div className="border-t border-border bg-background md:hidden">
+        <div className="border-t border-border bg-background/95 backdrop-blur-xl md:hidden">
           <div className="container flex flex-col gap-4 py-6">
             {site.navLinks.map((link) => {
               const href = localizeHref(link.href, locale);
@@ -81,7 +81,7 @@ export function Navbar() {
                 <Link
                   key={link.label}
                   href={href}
-                  className={cn("text-sm font-medium", pathname === href && "text-accent")}
+                  className={cn("rounded-lg px-3 py-2 text-sm font-medium", pathname === href && "bg-foreground text-background")}
                   onClick={() => setOpen(false)}
                 >
                   {link.label}

@@ -11,11 +11,11 @@ export function Footer() {
   const site = getSiteContent(locale);
 
   return (
-    <footer className="border-t border-border bg-background">
+    <footer className="border-t border-border/70 bg-background/80 backdrop-blur-xl">
       <div className="container grid gap-8 py-12 md:grid-cols-[1.5fr_1fr_1fr]">
         <div className="space-y-3">
           <Logo size="sm" />
-          <p className="text-sm text-muted-foreground">{site.description}</p>
+          <p className="max-w-md text-sm leading-6 text-muted-foreground">{site.description}</p>
           <p className="text-sm text-muted-foreground">{site.location}</p>
         </div>
         <div className="space-y-3">
@@ -25,7 +25,7 @@ export function Footer() {
               <Link
                 key={link.label}
                 href={localizeHref(link.href, locale)}
-                className="hover:text-accent"
+            className="text-muted-foreground transition hover:text-accent"
               >
                 {link.label}
               </Link>
@@ -34,17 +34,17 @@ export function Footer() {
         </div>
         <div className="space-y-3">
           <p className="text-sm font-semibold">Contact</p>
-          <a href={`mailto:${site.email}`} className="text-sm hover:text-accent">
+          <a href={`mailto:${site.email}`} className="text-sm text-muted-foreground transition hover:text-accent">
             {site.email}
           </a>
           <div className="flex gap-3 text-sm">
-            <a href={site.socials.linkedin} className="hover:text-accent">
+            <a href={site.socials.linkedin} className="text-muted-foreground transition hover:text-accent">
               LinkedIn
             </a>
-            <a href={site.socials.github} className="hover:text-accent">
+            <a href={site.socials.github} className="text-muted-foreground transition hover:text-accent">
               GitHub
             </a>
-            <a href={site.socials.x} className="hover:text-accent">
+            <a href={site.socials.x} className="text-muted-foreground transition hover:text-accent">
               X
             </a>
           </div>
