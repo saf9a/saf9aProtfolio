@@ -3,13 +3,20 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import type { SiteContent } from "@/content/site";
+import { getMessages, type Locale } from "@/lib/i18n";
 
 type ScrollStoryProps = {
   site: SiteContent;
-  locale?: "en" | "fr";
+  locale?: Locale;
 };
 
-function StepVisual({ index }: { index: number }) {
+function StepVisual({
+  index,
+  labels,
+}: {
+  index: number;
+  labels: ReturnType<typeof getMessages>["scrollStory"];
+}) {
   const visuals = [
     // 01 — Strategy
     <div key="strategy" className="relative flex h-full items-center justify-center">
@@ -54,7 +61,7 @@ function StepVisual({ index }: { index: number }) {
     // 03 — Cloud
     <div key="cloud" className="relative flex h-full items-center justify-center">
       <div className="w-64 space-y-2">
-        {["Build", "Test", "Deploy", "Monitor"].map((label, i) => (
+        {[labels.build, labels.test, labels.deploy, labels.monitor].map((label, i) => (
           <div key={label} className="flex items-center gap-3">
             <div className="flex h-8 w-8 items-center justify-center rounded-full border border-accent/30 bg-accent/10 text-xs font-semibold text-accent">
               {i + 1}
@@ -65,8 +72,8 @@ function StepVisual({ index }: { index: number }) {
             </div>
           </div>
         ))}
-        <div className="mt-2 rounded-lg border border-success/20 bg-success/8 px-3 py-2 text-center text-xs text-success">
-          ✓ Production live
+        <div className="mt-2 rounded-lg border border-success/25 bg-success/10 px-3 py-2 text-center text-xs font-semibold text-success">
+          {labels.productionLive}
         </div>
       </div>
     </div>,
@@ -105,6 +112,8 @@ export function ScrollStory({ site, locale = "en" }: ScrollStoryProps) {
   const prefersReducedMotion = useReducedMotion();
   const steps = site.processSteps;
   const panelCount = steps.length;
+  const messages = getMessages(locale);
+  const copy = messages.scrollStory;
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -116,11 +125,6 @@ export function ScrollStory({ site, locale = "en" }: ScrollStoryProps) {
     [0, 1],
     ["0vw", prefersReducedMotion ? "0vw" : `${-(panelCount - 1) * 100}vw`],
   );
-
-  const copy =
-    locale === "fr"
-      ? { overline: "Méthode", of: "sur" }
-      : { overline: "Method", of: "of" };
 
   return (
     <section
@@ -163,10 +167,10 @@ export function ScrollStory({ site, locale = "en" }: ScrollStoryProps) {
                     <p className="text-xs font-semibold uppercase tracking-[0.3em] text-accent">
                       {copy.overline} — 0{i + 1} {copy.of} 0{panelCount}
                     </p>
-                    <h2 className="mt-5 text-balance text-4xl font-semibold leading-tight tracking-[-0.02em] text-foreground dark:text-white md:text-5xl lg:text-6xl">
+                    <h2 className="mt-5 text-balance text-4xl font-semibold leading-tight text-foreground dark:text-white md:text-5xl lg:text-6xl">
                       {step.title}
                     </h2>
-                    <p className="mt-6 max-w-md text-base leading-7 text-muted-foreground md:text-lg dark:text-white/55">
+                    <p className="mt-6 max-w-md text-base leading-7 text-muted-foreground md:text-lg dark:text-white/75">
                       {step.description}
                     </p>
 
@@ -187,7 +191,7 @@ export function ScrollStory({ site, locale = "en" }: ScrollStoryProps) {
 
                   {/* Visual */}
                   <div className="hidden h-72 lg:block">
-                    <StepVisual index={i} />
+                    <StepVisual index={i} labels={copy} />
                   </div>
                 </div>
               </div>
@@ -201,8 +205,8 @@ export function ScrollStory({ site, locale = "en" }: ScrollStoryProps) {
         </motion.div>
 
         {/* Scroll hint */}
-        <div className="pointer-events-none absolute bottom-8 right-12 hidden items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-muted-foreground/40 dark:text-white/30 lg:flex">
-          <span>Scroll</span>
+        <div className="pointer-events-none absolute bottom-8 right-12 hidden items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-muted-foreground dark:text-white/65 lg:flex">
+          <span>{messages.common.scroll}</span>
           <svg width="28" height="10" viewBox="0 0 28 10" fill="none" aria-hidden>
             <path d="M0 5h24M20 1l4 4-4 4" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
           </svg>

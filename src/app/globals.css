@@ -6,13 +6,13 @@
   --background: 42 38% 97%;
   --foreground: 219 43% 10%;
   --muted: 210 26% 92%;
-  --muted-foreground: 215 14% 42%;
+  --muted-foreground: 215 18% 34%;
   --surface: 0 0% 100%;
   --surface-strong: 214 42% 13%;
-  --accent: 196 90% 43%;
+  --accent: 196 96% 31%;
   --accent-foreground: 0 0% 100%;
-  --success: 160 58% 39%;
-  --warning: 34 88% 51%;
+  --success: 160 64% 29%;
+  --warning: 34 90% 38%;
   --border: 214 24% 86%;
 }
 
@@ -20,13 +20,13 @@
   --background: 216 42% 7%;
   --foreground: 210 35% 96%;
   --muted: 217 24% 16%;
-  --muted-foreground: 215 18% 68%;
+  --muted-foreground: 215 20% 76%;
   --surface: 216 36% 10%;
   --surface-strong: 214 42% 13%;
-  --accent: 190 92% 52%;
+  --accent: 190 92% 62%;
   --accent-foreground: 216 42% 7%;
-  --success: 156 58% 50%;
-  --warning: 38 92% 58%;
+  --success: 156 58% 58%;
+  --warning: 38 92% 66%;
   --border: 216 20% 22%;
 }
 
@@ -60,6 +60,12 @@ h6 {
 
 a {
   @apply text-foreground;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid hsl(var(--accent));
+  outline-offset: 3px;
 }
 
 .bg-grid {
@@ -140,13 +146,62 @@ a {
   }
 
   .hero-title {
-    font-size: clamp(3rem, 6vw, 5.25rem);
-    line-height: 0.98;
+    font-size: 2.75rem;
+    line-height: 1;
   }
 
   .page-title {
-    font-size: clamp(2.75rem, 5vw, 4.75rem);
-    line-height: 0.98;
+    font-size: 2.5rem;
+    line-height: 1;
+  }
+}
+
+@media (min-width: 640px) {
+  .hero-title {
+    font-size: 3.5rem;
+  }
+
+  .page-title {
+    font-size: 3.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-title {
+    font-size: 4.5rem;
+  }
+
+  .page-title {
+    font-size: 4.5rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .hero-title {
+    font-size: 5.1rem;
+  }
+
+  .page-title {
+    font-size: 4.75rem;
+  }
+}
+
+@media (min-width: 768px) and (max-height: 820px) {
+  .hero-shell {
+    gap: 1.1rem;
+    min-height: calc(100svh - 4.5rem);
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+  }
+
+  .hero-title {
+    font-size: 3.55rem;
+  }
+}
+
+@media (min-width: 1024px) and (max-height: 760px) {
+  .hero-title {
+    font-size: 3.25rem;
   }
 }
 

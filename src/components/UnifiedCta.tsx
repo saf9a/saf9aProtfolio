@@ -28,7 +28,7 @@ export function UnifiedCta({
           <h2 className="max-w-2xl text-3xl font-semibold leading-tight text-balance md:text-4xl">
             {headline}
           </h2>
-          <p className="mt-4 max-w-2xl text-sm leading-6 text-background/75 md:text-base">
+          <p className="mt-4 max-w-2xl text-sm leading-6 text-background/85 md:text-base">
             {description}
           </p>
         </div>
@@ -37,12 +37,12 @@ export function UnifiedCta({
             {primaryLabel}
           </Button>
           {secondaryLabel && secondaryHref ? (
-            <Button href={secondaryHref} variant="secondary" className="border-background/20 bg-background/10 text-background hover:bg-background/15">
+            <Button href={secondaryHref} variant="secondary" className="border-background/25 bg-background/10 text-background hover:bg-background/15">
               {secondaryLabel}
             </Button>
           ) : null}
           {email ? (
-            <Link href={`mailto:${email}`} className="text-sm font-semibold text-background/80 hover:text-background">
+            <Link href={`mailto:${email}`} className="text-sm font-semibold text-background/90 transition hover:text-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent">
               {email}
             </Link>
           ) : null}

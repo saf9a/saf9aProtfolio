@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/Button";
-import { getLocaleFromPathname } from "@/lib/i18n";
+import { getLocaleFromPathname, getMessages } from "@/lib/i18n";
 
 const initialState = {
   name: "",
@@ -22,73 +22,10 @@ const isValidEmail = (email: string) => {
 export function BookingForm() {
   const pathname = usePathname();
   const locale = getLocaleFromPathname(pathname);
+  const copy = getMessages(locale).forms.booking;
   const [formData, setFormData] = useState(initialState);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
-
-  const copy =
-    locale === "fr"
-      ? {
-          validation:
-            "Merci d'indiquer votre nom, un email valide, le type d'appel et un court brief.",
-          success:
-            "Merci. Nous avons bien recu votre demande et confirmerons le creneau par email sous un jour ouvre.",
-          fallbackError: "Une erreur est survenue.",
-          name: "Nom",
-          email: "Email",
-          company: "Entreprise (optionnel)",
-          callType: "Type d'appel",
-          preferredDate: "Date souhaitee (optionnel)",
-          preferredWindow: "Plage horaire preferee",
-          prepare: "Que devons-nous preparer ?",
-          namePlaceholder: "Votre nom",
-          emailPlaceholder: "vous@entreprise.com",
-          companyPlaceholder: "Entreprise ou projet",
-          callTypePlaceholder: "Choisir un type d'appel",
-          callTypes: [
-            "Appel de decouverte",
-            "Cadrage projet",
-            "Planification DevOps",
-            "Revue automatisation IA",
-            "Consultation generale",
-          ],
-          timeWindows: ["Flexible", "Matin", "Apres-midi", "Fin d'apres-midi"],
-          detailsPlaceholder:
-            "Donnez le contexte, l'objectif de l'appel, le calendrier et ce que vous voulez que nous preparions.",
-          sending: "Envoi...",
-          submit: "Demander un rendez-vous",
-          note: "Nous confirmons les demandes par email sous un jour ouvre.",
-        }
-      : {
-          validation: "Please provide your name, a valid email, call type, and a short brief.",
-          success:
-            "Thanks. We received your booking request and will confirm by email within one business day.",
-          fallbackError: "Something went wrong.",
-          name: "Name",
-          email: "Email",
-          company: "Company (optional)",
-          callType: "Call type",
-          preferredDate: "Preferred date (optional)",
-          preferredWindow: "Preferred time window",
-          prepare: "What should we prepare for?",
-          namePlaceholder: "Your name",
-          emailPlaceholder: "you@company.com",
-          companyPlaceholder: "Company or project",
-          callTypePlaceholder: "Select a call type",
-          callTypes: [
-            "Discovery call",
-            "Project scoping",
-            "DevOps planning",
-            "AI automation review",
-            "General consultation",
-          ],
-          timeWindows: ["Flexible", "Morning", "Afternoon", "Late afternoon"],
-          detailsPlaceholder:
-            "Tell us the goal of the call, context, timeline, and anything you want reviewed.",
-          sending: "Sending...",
-          submit: "Request booking",
-          note: "We confirm bookings by email within one business day.",
-        };
 
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -121,6 +58,7 @@ export function BookingForm() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          locale,
           submissionType: "booking",
           ...formData,
         }),
@@ -129,7 +67,7 @@ export function BookingForm() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data?.error || "Something went wrong. Please try again.");
+        throw new Error(data?.error || copy.submitError);
       }
 
       setStatus("success");
@@ -272,7 +210,7 @@ export function BookingForm() {
       {status !== "idle" ? (
         <p
           className={
-            status === "success" ? "text-sm text-success" : "text-sm text-red-600"
+            status === "success" ? "text-sm text-success" : "text-sm text-red-700 dark:text-red-300"
           }
           role="status"
           aria-live="polite"

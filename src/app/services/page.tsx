@@ -4,18 +4,17 @@ import { Section } from "@/components/Section";
 import { PageHero } from "@/components/PageHero";
 import { UnifiedCta } from "@/components/UnifiedCta";
 import { buildPageMetadata } from "@/lib/seo";
+import { getMessages, localizeHref } from "@/lib/i18n";
+
+const locale = "en" as const;
+const messages = getMessages(locale);
+const page = messages.pages.services;
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "Web Development, DevOps & AI Automation Services",
-  description:
-    "Explore Saf9a services for web development, DevOps consulting, and AI automation from Tunis, Tunisia.",
+  title: page.metadata.title,
+  description: page.metadata.description,
   path: "/services",
-  keywords: [
-    "web development services Tunisia",
-    "DevOps consulting Tunisia",
-    "AI automation services Tunisia",
-    "Tunis software studio",
-  ],
+  keywords: page.metadata.keywords,
 });
 
 export default function ServicesPage() {
@@ -23,13 +22,14 @@ export default function ServicesPage() {
     <>
       <PageHero
           variant="services"
-          overline="Services"
-          title="Product, cloud, and AI delivery in one system."
-          description="Founder-led delivery from Tunis, Tunisia with clear scopes, fast timelines, and production-ready execution."
+          locale={locale}
+          overline={page.hero.overline}
+          title={page.hero.title}
+          description={page.hero.description}
           primaryLabel={site.booking.primaryCta}
-          primaryHref="/book"
-          secondaryLabel="Talk to us"
-          secondaryHref="/contact"
+          primaryHref={localizeHref("/book", locale)}
+          secondaryLabel={page.hero.secondaryLabel}
+          secondaryHref={localizeHref("/contact", locale)}
       />
       <Section className="pt-8">
         <div className="grid gap-4 lg:grid-cols-2">
@@ -54,7 +54,7 @@ export default function ServicesPage() {
               <div className="mt-7 grid gap-6 md:grid-cols-2">
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-[0.22em] text-foreground">
-                    What you get
+                    {page.offerLabels.whatYouGet}
                   </p>
                   <ul className="mt-4 space-y-3 text-sm leading-6 text-muted-foreground">
                     {offer.whatYouGet.map((item) => (
@@ -67,7 +67,7 @@ export default function ServicesPage() {
                 </div>
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-[0.22em] text-foreground">
-                    Timeline
+                    {page.offerLabels.timeline}
                   </p>
                   <ul className="mt-4 space-y-3 text-sm leading-6 text-muted-foreground">
                     {offer.timelineSteps.map((item) => (
@@ -80,7 +80,7 @@ export default function ServicesPage() {
                 </div>
               </div>
               <p className="mt-7 rounded-lg border border-border bg-background/50 p-4 text-sm leading-6 text-muted-foreground">
-                Ideal for: {offer.idealFor}
+                {page.offerLabels.idealFor} {offer.idealFor}
               </p>
             </div>
           ))}
@@ -88,12 +88,12 @@ export default function ServicesPage() {
       </Section>
       <Section className="pt-8">
         <UnifiedCta
-          headline="Not sure which offer fits?"
-          description="We can help you choose the right scope in a 20-minute discovery call."
+          headline={page.cta.headline}
+          description={page.cta.description}
           primaryLabel={site.booking.primaryCta}
-          primaryHref="/book"
-          secondaryLabel="Contact us"
-          secondaryHref="/contact"
+          primaryHref={localizeHref("/book", locale)}
+          secondaryLabel={page.cta.secondaryLabel}
+          secondaryHref={localizeHref("/contact", locale)}
         />
       </Section>
     </>

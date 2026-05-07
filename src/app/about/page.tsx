@@ -4,13 +4,17 @@ import { PageHero } from "@/components/PageHero";
 import { Section } from "@/components/Section";
 import { SectionHeading } from "@/components/SectionHeading";
 import { buildPageMetadata } from "@/lib/seo";
+import { getMessages, localizeHref } from "@/lib/i18n";
+
+const locale = "en" as const;
+const messages = getMessages(locale);
+const page = messages.pages.about;
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "About Saf9a",
-  description:
-    "Meet Saf9a, a Tunis, Tunisia studio offering web development, DevOps, and AI automation with direct founder-led delivery.",
+  title: page.metadata.title,
+  description: page.metadata.description,
   path: "/about",
-  keywords: ["about Saf9a", "Tunis web development studio", "DevOps Tunisia", "AI automation Tunisia"],
+  keywords: page.metadata.keywords,
 });
 
 export default function AboutPage() {
@@ -18,13 +22,14 @@ export default function AboutPage() {
     <>
       <PageHero
         variant="about"
-        overline="About"
-        title="Senior builders. Small team. Clean execution."
+        locale={locale}
+        overline={page.hero.overline}
+        title={page.hero.title}
         description={site.about.mission}
         primaryLabel={site.booking.primaryCta}
-        primaryHref="/book"
-        secondaryLabel="View work"
-        secondaryHref="/work"
+        primaryHref={localizeHref("/book", locale)}
+        secondaryLabel={page.hero.secondaryLabel}
+        secondaryHref={localizeHref("/work", locale)}
       />
       <Section className="pt-8">
         <p className="max-w-3xl text-base leading-7 text-muted-foreground">{site.about.story}</p>
@@ -42,9 +47,9 @@ export default function AboutPage() {
       </Section>
       <Section className="pt-8">
         <SectionHeading
-          overline="Founders"
-          title="Direct access to the people doing the work"
-          description="No account managers, no handoffs. You work with the builders."
+          overline={page.founders.overline}
+          title={page.founders.title}
+          description={page.founders.description}
         />
         <div className="mt-10 grid gap-4 md:grid-cols-2">
           {site.about.founders.map((founder) => (
@@ -63,9 +68,9 @@ export default function AboutPage() {
         <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
           <div>
             <SectionHeading
-              overline="Why Tunisia"
-              title="A strategic base for global delivery"
-              description="We combine local speed with international quality expectations."
+              overline={page.whyTunisia.overline}
+              title={page.whyTunisia.title}
+              description={page.whyTunisia.description}
             />
             <ul className="mt-6 space-y-3 text-sm leading-6 text-muted-foreground">
               {site.about.whyTunisia.map((item) => (
@@ -77,15 +82,15 @@ export default function AboutPage() {
             </ul>
           </div>
           <div className="rounded-lg border border-border bg-surface-strong p-6 text-background shadow-lift dark:bg-surface dark:text-foreground">
-            <h3 className="text-lg font-semibold">Core tech stack</h3>
-            <p className="mt-2 text-sm leading-6 text-background/75 dark:text-muted-foreground">
-              Modern, scalable tools that keep delivery fast and reliable.
+            <h3 className="text-lg font-semibold">{page.techStack.title}</h3>
+            <p className="mt-2 text-sm leading-6 text-background/85 dark:text-muted-foreground">
+              {page.techStack.description}
             </p>
             <div className="mt-6 flex flex-wrap gap-2">
               {site.about.techStack.map((tool) => (
                 <span
                   key={tool}
-                  className="rounded-full border border-background/15 px-3 py-1 text-xs text-background/75 dark:border-border dark:text-muted-foreground"
+                  className="rounded-full border border-background/20 px-3 py-1 text-xs text-background/85 dark:border-border dark:text-muted-foreground"
                 >
                   {tool}
                 </span>

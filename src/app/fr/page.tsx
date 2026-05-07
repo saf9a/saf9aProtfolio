@@ -2,21 +2,17 @@ import type { Metadata } from "next";
 import { siteFr } from "@/content/site";
 import { HomeExperience } from "@/components/HomeExperience";
 import { buildPageMetadata } from "@/lib/seo";
+import { getMessages } from "@/lib/i18n";
 
 const locale = "fr" as const;
+const messages = getMessages(locale);
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "Developpement web, DevOps et automatisation IA en Tunisie",
+  title: messages.pages.home.metadata.title,
   description: siteFr.description,
   path: "/fr",
   locale,
-  keywords: [
-    "Saf9a",
-    "developpement web Tunisie",
-    "DevOps Tunisie",
-    "automatisation IA Tunisie",
-    "studio logiciel Tunis",
-  ],
+  keywords: messages.pages.home.metadata.keywords,
 });
 
 const faqJsonLd = {

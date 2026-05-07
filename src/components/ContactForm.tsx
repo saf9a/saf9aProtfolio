@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/Button";
-import { getLocaleFromPathname } from "@/lib/i18n";
+import { getLocaleFromPathname, getMessages } from "@/lib/i18n";
 
 const initialState = {
   name: "",
@@ -19,45 +19,10 @@ const isValidEmail = (email: string) => {
 export function ContactForm() {
   const pathname = usePathname();
   const locale = getLocaleFromPathname(pathname);
+  const copy = getMessages(locale).forms.contact;
   const [formData, setFormData] = useState(initialState);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
-
-  const copy =
-    locale === "fr"
-      ? {
-          validation: "Merci d'indiquer votre nom, un email valide et un court message.",
-          success: "Merci. Nous vous repondrons sous un jour ouvre.",
-          fallbackError: "Une erreur est survenue.",
-          name: "Nom",
-          email: "Email",
-          company: "Entreprise (optionnel)",
-          projectDetails: "Details du projet",
-          namePlaceholder: "Votre nom",
-          emailPlaceholder: "vous@entreprise.com",
-          companyPlaceholder: "Entreprise ou projet",
-          detailsPlaceholder:
-            "Parlez-nous de vos objectifs, du calendrier et des resultats attendus.",
-          sending: "Envoi...",
-          submit: "Envoyer le message",
-          note: "Nous repondons sous un jour ouvre.",
-        }
-      : {
-          validation: "Please provide your name, a valid email, and a short message.",
-          success: "Thanks for reaching out. We will reply within one business day.",
-          fallbackError: "Something went wrong.",
-          name: "Name",
-          email: "Email",
-          company: "Company (optional)",
-          projectDetails: "Project details",
-          namePlaceholder: "Your name",
-          emailPlaceholder: "you@company.com",
-          companyPlaceholder: "Company or project",
-          detailsPlaceholder: "Tell us about your goals, timeline, and the outcomes you need.",
-          sending: "Sending...",
-          submit: "Send message",
-          note: "We reply within one business day.",
-        };
 
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -84,13 +49,13 @@ export function ContactForm() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ locale, ...formData }),
       });
 
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data?.error || "Something went wrong. Please try again.");
+        throw new Error(data?.error || copy.submitError);
       }
 
       setStatus("success");
@@ -175,7 +140,7 @@ export function ContactForm() {
       {status !== "idle" ? (
         <p
           className={
-            status === "success" ? "text-sm text-success" : "text-sm text-red-600"
+            status === "success" ? "text-sm text-success" : "text-sm text-red-700 dark:text-red-300"
           }
           role="status"
           aria-live="polite"

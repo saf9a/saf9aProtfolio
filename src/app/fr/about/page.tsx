@@ -4,16 +4,18 @@ import { PageHero } from "@/components/PageHero";
 import { Section } from "@/components/Section";
 import { SectionHeading } from "@/components/SectionHeading";
 import { buildPageMetadata } from "@/lib/seo";
+import { getMessages, localizeHref } from "@/lib/i18n";
 
 const locale = "fr" as const;
+const messages = getMessages(locale);
+const page = messages.pages.about;
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "A propos de Saf9a",
-  description:
-    "Decouvrez Saf9a, studio base a Tunis pour le developpement web, DevOps et automatisation IA.",
+  title: page.metadata.title,
+  description: page.metadata.description,
   path: "/fr/about",
   locale,
-  keywords: ["a propos Saf9a", "studio developpement web Tunis", "DevOps Tunisie", "automatisation IA Tunisie"],
+  keywords: page.metadata.keywords,
 });
 
 export default function AboutPageFr() {
@@ -21,13 +23,14 @@ export default function AboutPageFr() {
     <>
       <PageHero
         variant="about"
-        overline="A propos"
-        title="Builders seniors. Petite equipe. Execution nette."
+        locale={locale}
+        overline={page.hero.overline}
+        title={page.hero.title}
         description={siteFr.about.mission}
         primaryLabel={siteFr.booking.primaryCta}
-        primaryHref="/fr/book"
-        secondaryLabel="Voir les realisations"
-        secondaryHref="/fr/work"
+        primaryHref={localizeHref("/book", locale)}
+        secondaryLabel={page.hero.secondaryLabel}
+        secondaryHref={localizeHref("/work", locale)}
       />
       <Section className="pt-8">
         <p className="max-w-3xl text-base leading-7 text-muted-foreground">{siteFr.about.story}</p>
@@ -45,9 +48,9 @@ export default function AboutPageFr() {
       </Section>
       <Section className="pt-8">
         <SectionHeading
-          overline="Fondateurs"
-          title="Acces direct aux personnes qui construisent"
-          description="Pas d'account managers, pas de passations inutiles. Vous travaillez avec les builders."
+          overline={page.founders.overline}
+          title={page.founders.title}
+          description={page.founders.description}
         />
         <div className="mt-10 grid gap-4 md:grid-cols-2">
           {siteFr.about.founders.map((founder) => (
@@ -66,9 +69,9 @@ export default function AboutPageFr() {
         <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
           <div>
             <SectionHeading
-              overline="Pourquoi la Tunisie"
-              title="Une base strategique pour livrer a l'international"
-              description="Nous combinons vitesse locale et exigences de qualite internationales."
+              overline={page.whyTunisia.overline}
+              title={page.whyTunisia.title}
+              description={page.whyTunisia.description}
             />
             <ul className="mt-6 space-y-3 text-sm leading-6 text-muted-foreground">
               {siteFr.about.whyTunisia.map((item) => (
@@ -80,15 +83,15 @@ export default function AboutPageFr() {
             </ul>
           </div>
           <div className="rounded-lg border border-border bg-surface-strong p-6 text-background shadow-lift dark:bg-surface dark:text-foreground">
-            <h3 className="text-lg font-semibold">Stack technique principale</h3>
-            <p className="mt-2 text-sm leading-6 text-background/75 dark:text-muted-foreground">
-              Des outils modernes et scalables pour garder une livraison rapide et fiable.
+            <h3 className="text-lg font-semibold">{page.techStack.title}</h3>
+            <p className="mt-2 text-sm leading-6 text-background/85 dark:text-muted-foreground">
+              {page.techStack.description}
             </p>
             <div className="mt-6 flex flex-wrap gap-2">
               {siteFr.about.techStack.map((tool) => (
                 <span
                   key={tool}
-                  className="rounded-full border border-background/15 px-3 py-1 text-xs text-background/75 dark:border-border dark:text-muted-foreground"
+                  className="rounded-full border border-background/20 px-3 py-1 text-xs text-background/85 dark:border-border dark:text-muted-foreground"
                 >
                   {tool}
                 </span>

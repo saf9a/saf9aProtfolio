@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { getLocaleFromPathname } from "@/lib/i18n";
+import { getLocaleFromPathname, getMessages } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
 const storageKey = "theme";
@@ -10,6 +10,7 @@ const storageKey = "theme";
 export function ThemeToggle({ className }: { className?: string }) {
   const pathname = usePathname();
   const locale = getLocaleFromPathname(pathname);
+  const messages = getMessages(locale);
   const [theme, setTheme] = useState<"light" | "dark" | null>(null);
 
   useEffect(() => {
@@ -33,10 +34,10 @@ export function ThemeToggle({ className }: { className?: string }) {
       type="button"
       onClick={toggleTheme}
       className={cn(
-        "inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-surface/80 text-sm shadow-soft backdrop-blur transition hover:border-foreground/30",
+        "inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-surface text-sm text-foreground shadow-soft backdrop-blur transition hover:border-foreground/35 hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background",
         className
       )}
-      aria-label={locale === "fr" ? "Changer le theme" : "Toggle theme"}
+      aria-label={messages.common.toggleTheme}
       aria-pressed={isDark}
     >
       {isDark ? (

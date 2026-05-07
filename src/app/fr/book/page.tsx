@@ -4,14 +4,18 @@ import { PageHero } from "@/components/PageHero";
 import { Section } from "@/components/Section";
 import { BookingForm } from "@/components/BookingForm";
 import { buildPageMetadata } from "@/lib/seo";
+import { getMessages } from "@/lib/i18n";
+
+const locale = "fr" as const;
+const messages = getMessages(locale);
+const page = messages.pages.book;
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "Demander un appel",
-  description:
-    "Demandez un appel avec Saf9a pour vos projets de developpement web, DevOps ou automatisation IA.",
+  title: page.metadata.title,
+  description: page.metadata.description,
   path: "/fr/book",
-  locale: "fr",
-  keywords: ["demander un appel Saf9a", "consultation developpement web", "consultation DevOps Tunisie"],
+  locale,
+  keywords: page.metadata.keywords,
 });
 
 export default function BookPageFr() {
@@ -19,8 +23,9 @@ export default function BookPageFr() {
     <>
       <PageHero
         variant="book"
-        overline="Reservation"
-        title="Reserver un appel de cadrage."
+        locale={locale}
+        overline={page.hero.overline}
+        title={page.hero.title}
         description={siteFr.booking.description}
       />
       <Section className="pt-8">
@@ -30,26 +35,20 @@ export default function BookPageFr() {
           </div>
           <div className="space-y-6 rounded-lg border border-border bg-surface-strong p-6 text-background shadow-lift dark:bg-surface dark:text-foreground">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-accent">La suite</p>
-              <ul className="mt-5 space-y-4 text-sm leading-6 text-background/75 dark:text-muted-foreground">
-                <li className="flex items-start gap-2">
-                  <span className="mt-2 h-1.5 w-1.5 rounded-full bg-accent" />
-                  <span>Nous relisons votre demande et confirmons le format d&apos;appel le plus utile.</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="mt-2 h-1.5 w-1.5 rounded-full bg-success" />
-                  <span>Nous repondons par email sous un jour ouvre avec un horaire confirme.</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="mt-2 h-1.5 w-1.5 rounded-full bg-warning" />
-                  <span>Nous arrivons prepares avec le contexte, les questions et les prochaines etapes.</span>
-                </li>
+              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-accent">{page.next.title}</p>
+              <ul className="mt-5 space-y-4 text-sm leading-6 text-background/85 dark:text-muted-foreground">
+                {page.next.steps.map((step, index) => (
+                  <li key={step} className="flex items-start gap-2">
+                    <span className={`mt-2 h-1.5 w-1.5 rounded-full ${index === 0 ? "bg-accent" : index === 1 ? "bg-success" : "bg-warning"}`} />
+                    <span>{step}</span>
+                  </li>
+                ))}
               </ul>
             </div>
             <div className="rounded-lg border border-background/15 bg-background/10 p-4 dark:border-border dark:bg-background/45">
-              <p className="text-sm font-semibold">Vous preferez l&apos;email ?</p>
-              <p className="mt-2 text-sm leading-6 text-background/75 dark:text-muted-foreground">
-                Envoyez directement vos disponibilites et le contexte du projet, nous prenons la suite.
+              <p className="text-sm font-semibold">{page.email.title}</p>
+              <p className="mt-2 text-sm leading-6 text-background/85 dark:text-muted-foreground">
+                {page.email.description}
               </p>
               <a href={`mailto:${siteFr.email}`} className="mt-4 inline-flex text-sm font-semibold text-accent">
                 {siteFr.email}

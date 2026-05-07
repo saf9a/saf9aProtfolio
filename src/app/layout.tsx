@@ -7,6 +7,7 @@ import { DocumentLanguage } from "@/components/DocumentLanguage";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { ScrollProgress } from "@/components/ScrollProgress";
+import { SkipLink } from "@/components/SkipLink";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -125,12 +126,7 @@ export default function RootLayout({
         <ScrollProgress />
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <DocumentLanguage />
-        <a
-          href="#content"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-6 focus:top-6 focus:z-50 focus:rounded-full focus:bg-background focus:px-4 focus:py-2 focus:text-sm focus:shadow-soft"
-        >
-          Skip to content
-        </a>
+        <SkipLink />
         <Navbar />
         <main id="content" className="min-h-screen">
           {children}

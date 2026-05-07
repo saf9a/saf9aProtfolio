@@ -2,10 +2,11 @@
 
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import type { SiteContent } from "@/content/site";
+import { getMessages, type Locale } from "@/lib/i18n";
 
 type ProductShowcaseProps = {
   site: SiteContent;
-  locale?: "en" | "fr";
+  locale?: Locale;
 };
 
 export function ProductShowcase({ site, locale = "en" }: ProductShowcaseProps) {
@@ -14,26 +15,7 @@ export function ProductShowcase({ site, locale = "en" }: ProductShowcaseProps) {
   const y = useTransform(scrollYProgress, [0, 0.28], [0, prefersReducedMotion ? 0 : -22]);
   const rotateX = useTransform(scrollYProgress, [0, 0.28], [0, prefersReducedMotion ? 0 : 3]);
 
-  const labels =
-    locale === "fr"
-      ? {
-          command: "deploiement",
-          live: "prod stable",
-          review: "revue IA",
-          timeline: "plan sprint",
-          risk: "risque faible",
-          pipeline: "pipeline",
-          observability: "observabilite",
-        }
-      : {
-          command: "deployment",
-          live: "prod stable",
-          review: "AI review",
-          timeline: "sprint plan",
-          risk: "low risk",
-          pipeline: "pipeline",
-          observability: "observability",
-        };
+  const labels = getMessages(locale).productShowcase;
 
   return (
     <motion.div
@@ -50,13 +32,13 @@ export function ProductShowcase({ site, locale = "en" }: ProductShowcaseProps) {
               <span className="h-2.5 w-2.5 rounded-full bg-warning" />
               <span className="h-2.5 w-2.5 rounded-full bg-success" />
             </div>
-            <span className="rounded-full border border-white/10 px-3 py-1 text-[11px] text-white/70">
+            <span className="rounded-full border border-white/15 px-3 py-1 text-[11px] text-white/80">
               {labels.live}
             </span>
           </div>
           <div className="grid gap-0 md:grid-cols-[0.9fr_1.1fr]">
             <div className="border-b border-white/10 p-3 md:border-b-0 md:border-r">
-              <p className="text-xs uppercase tracking-[0.22em] text-white/45">{labels.command}</p>
+              <p className="text-xs uppercase tracking-[0.22em] text-white/70">{labels.command}</p>
               <div className="mt-4 space-y-2.5">
                 {site.capabilities.map((capability, index) => (
                   <motion.div
@@ -89,7 +71,7 @@ export function ProductShowcase({ site, locale = "en" }: ProductShowcaseProps) {
                     key={item.label}
                     className={index === 2 ? "col-span-2 rounded-md border border-white/10 bg-white/[0.055] p-3" : "rounded-md border border-white/10 bg-white/[0.055] p-3"}
                   >
-                    <p className="text-[11px] uppercase tracking-[0.2em] text-white/45">
+                    <p className="text-[11px] uppercase tracking-[0.2em] text-white/70">
                       {item.label}
                     </p>
                     <p className="mt-2 text-xs font-semibold leading-5 text-white/90 md:text-sm">{item.value}</p>
@@ -113,7 +95,7 @@ export function ProductShowcase({ site, locale = "en" }: ProductShowcaseProps) {
                   ))}
                 </div>
               </div>
-              <div className="mt-3 grid grid-cols-2 gap-2.5 text-xs text-white/75">
+              <div className="mt-3 grid grid-cols-2 gap-2.5 text-xs text-white/85">
                 <div className="rounded-md border border-white/10 bg-white/[0.055] p-2.5">
                   {labels.review}
                 </div>

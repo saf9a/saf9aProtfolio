@@ -4,13 +4,17 @@ import { Section } from "@/components/Section";
 import { PageHero } from "@/components/PageHero";
 import { BookingForm } from "@/components/BookingForm";
 import { buildPageMetadata } from "@/lib/seo";
+import { getMessages } from "@/lib/i18n";
+
+const locale = "en" as const;
+const messages = getMessages(locale);
+const page = messages.pages.book;
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "Request a Call",
-  description:
-    "Request a call with Saf9a for web development, DevOps, or AI automation projects and planning.",
+  title: page.metadata.title,
+  description: page.metadata.description,
   path: "/book",
-  keywords: ["request a call Saf9a", "book web development consultation", "DevOps consultation Tunisia"],
+  keywords: page.metadata.keywords,
 });
 
 export default function BookPage() {
@@ -18,8 +22,9 @@ export default function BookPage() {
     <>
       <PageHero
         variant="book"
-        overline="Booking"
-        title="Book a focused build call."
+        locale={locale}
+        overline={page.hero.overline}
+        title={page.hero.title}
         description={site.booking.description}
       />
       <Section className="pt-8">
@@ -29,26 +34,20 @@ export default function BookPage() {
           </div>
           <div className="space-y-6 rounded-lg border border-border bg-surface-strong p-6 text-background shadow-lift dark:bg-surface dark:text-foreground">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-accent">What happens next</p>
-              <ul className="mt-5 space-y-4 text-sm leading-6 text-background/75 dark:text-muted-foreground">
-              <li className="flex items-start gap-2">
-                <span className="mt-2 h-1.5 w-1.5 rounded-full bg-accent" />
-                <span>We review your request and confirm the best call format.</span>
+              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-accent">{page.next.title}</p>
+              <ul className="mt-5 space-y-4 text-sm leading-6 text-background/85 dark:text-muted-foreground">
+              {page.next.steps.map((step, index) => (
+              <li key={step} className="flex items-start gap-2">
+                <span className={`mt-2 h-1.5 w-1.5 rounded-full ${index === 0 ? "bg-accent" : index === 1 ? "bg-success" : "bg-warning"}`} />
+                <span>{step}</span>
               </li>
-              <li className="flex items-start gap-2">
-                <span className="mt-2 h-1.5 w-1.5 rounded-full bg-success" />
-                <span>We reply by email within one business day with a confirmed time.</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="mt-2 h-1.5 w-1.5 rounded-full bg-warning" />
-                <span>We show up prepared with context, questions, and next steps.</span>
-              </li>
+              ))}
               </ul>
             </div>
             <div className="rounded-lg border border-background/15 bg-background/10 p-4 dark:border-border dark:bg-background/45">
-              <p className="text-sm font-semibold">Prefer email instead?</p>
-              <p className="mt-2 text-sm leading-6 text-background/75 dark:text-muted-foreground">
-                Send your availability and project context directly and we will take it from there.
+              <p className="text-sm font-semibold">{page.email.title}</p>
+              <p className="mt-2 text-sm leading-6 text-background/85 dark:text-muted-foreground">
+                {page.email.description}
               </p>
               <a href={`mailto:${site.email}`} className="mt-4 inline-flex text-sm font-semibold text-accent">
                 {site.email}

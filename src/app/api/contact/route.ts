@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { site } from "@/content/site";
+import { getMessages, type Locale } from "@/lib/i18n";
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -8,10 +9,14 @@ export async function POST(request: Request) {
   const body = await request.json().catch(() => null);
 
   if (!body) {
-    return NextResponse.json({ error: "Invalid request." }, { status: 400 });
+    return NextResponse.json(
+      { error: getMessages("en").forms.api.invalidRequest },
+      { status: 400 }
+    );
   }
 
   const {
+    locale,
     submissionType,
     name,
     email,
@@ -21,6 +26,7 @@ export async function POST(request: Request) {
     preferredDate,
     preferredWindow,
   } = body as {
+    locale?: Locale;
     submissionType?: "contact" | "booking";
     name?: string;
     email?: string;
@@ -32,13 +38,12 @@ export async function POST(request: Request) {
   };
 
   const isBooking = submissionType === "booking";
+  const copy = getMessages(locale === "fr" ? "fr" : "en").forms.api;
 
   if (!name || !email || !emailRegex.test(email) || !message || (isBooking && !service)) {
     return NextResponse.json(
       {
-        error: isBooking
-          ? "Please provide your name, valid email, booking type, and details."
-          : "Please provide a name, valid email, and message.",
+        error: isBooking ? copy.invalidBooking : copy.invalidContact,
       },
       { status: 400 }
     );
@@ -75,7 +80,7 @@ export async function POST(request: Request) {
 
     if (error) {
       return NextResponse.json(
-        { error: "Email failed to send. Please try again." },
+        { error: copy.sendFailed },
         { status: 500 }
       );
     }
@@ -104,7 +109,7 @@ export async function POST(request: Request) {
 
     if (!response.ok) {
       return NextResponse.json(
-        { error: "Form submission failed. Please try again." },
+        { error: copy.submitFailed },
         { status: 500 }
       );
     }
@@ -113,7 +118,7 @@ export async function POST(request: Request) {
   }
 
   return NextResponse.json(
-    { error: "Email provider not configured." },
+    { error: copy.providerMissing },
     { status: 500 }
   );
 }

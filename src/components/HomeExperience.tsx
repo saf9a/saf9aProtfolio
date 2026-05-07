@@ -13,110 +13,51 @@ import { SectionHeading } from "@/components/SectionHeading";
 import { ServiceCard } from "@/components/ServiceCard";
 import { TestimonialCard } from "@/components/TestimonialCard";
 import { UnifiedCta } from "@/components/UnifiedCta";
-import { localizeHref } from "@/lib/i18n";
+import { getMessages, localizeHref, type Locale } from "@/lib/i18n";
 
 type HomeExperienceProps = {
   site: SiteContent;
-  locale?: "en" | "fr";
+  locale?: Locale;
 };
 
 export function HomeExperience({ site, locale = "en" }: HomeExperienceProps) {
-  const copy =
-    locale === "fr"
-      ? {
-          servicesOverline: "Systeme de livraison",
-          servicesTitle: "Une seule equipe pour le produit, le cloud et l'automatisation",
-          servicesDescription:
-            "Chaque service s'emboite dans le suivant: clarifier le produit, le livrer proprement, puis automatiser ce qui ralentit l'equipe.",
-          servicesCta: "Voir les services",
-          processOverline: "Methode",
-          processTitle: "Un rythme calme du brief a la production",
-          processDescription:
-            "Le travail avance comme une sequence continue: cadrage, construction, durcissement, puis iteration sur usage reel.",
-          workOverline: "Resultats",
-          workTitle: "Des projets qui montrent le niveau d'execution",
-          workCta: "Voir les realisations",
-          proofOverline: "Confiance",
-          proofTitle: "Des equipes choisissent Saf9a pour avancer sans bruit",
-          proofDescription:
-            "Moins de passations, des decisions plus nettes, et un produit qui tient en production.",
-          faqOverline: "FAQ",
-          faqTitle: "Questions avant de demarrer",
-          faqDescription: "Les points pratiques avant de reserver un appel.",
-          aboutOverline: "Base operationnelle",
-          aboutTitle: "Une equipe compacte, senior, et proche de l'execution",
-          stack: "Stack principale",
-          whyTunisia: "Pourquoi Tunis",
-          email: "Email direct",
-          heroTitle: "Lancer plus vite. Operer plus propre. Automatiser mieux.",
-          heroDescription:
-            "Saf9a construit des produits web, des systemes cloud et des workflows IA pour les equipes qui veulent une execution nette, rapide et prete pour la production.",
-        }
-      : {
-          servicesOverline: "Delivery system",
-          servicesTitle: "One team across product, cloud, and automation",
-          servicesDescription:
-            "Each capability connects into the next: clarify the product, ship it cleanly, then automate the work slowing the team down.",
-          servicesCta: "View services",
-          processOverline: "Method",
-          processTitle: "A calm path from brief to production",
-          processDescription:
-            "The work moves as one continuous sequence: scope, build, harden, then iterate from real usage.",
-          workOverline: "Outcomes",
-          workTitle: "Projects that show the level of execution",
-          workCta: "View work",
-          proofOverline: "Proof",
-          proofTitle: "Teams choose Saf9a when they need progress without noise",
-          proofDescription:
-            "Fewer handoffs, sharper decisions, and software that holds up in production.",
-          faqOverline: "FAQ",
-          faqTitle: "Questions before we start",
-          faqDescription: "The practical details before you book a call.",
-          aboutOverline: "Operating base",
-          aboutTitle: "A compact senior team close to the work",
-          stack: "Core stack",
-          whyTunisia: "Why Tunis",
-          email: "Direct email",
-          heroTitle: "Launch faster. Operate cleaner. Automate smarter.",
-          heroDescription:
-            "Saf9a builds web products, cloud delivery systems, and AI workflows for teams that need production-grade execution without enterprise drag.",
-        };
+  const messages = getMessages(locale);
+  const copy = messages.home;
 
   return (
     <div className="relative">
       <div className="relative z-10">
-      <section id="top" className="relative overflow-hidden pb-12 pt-8 md:pb-16 md:pt-12">
+      <section id="top" className="relative overflow-hidden pb-10 pt-6 md:pb-12 md:pt-8">
         <div className="pointer-events-none absolute inset-0 bg-grid opacity-35" aria-hidden />
         <HeroThreeScene className="pointer-events-none absolute inset-0 h-full w-full opacity-80 [mask-image:linear-gradient(to_bottom,black_0%,black_70%,transparent_100%)] dark:opacity-95" />
         <div className="absolute inset-x-0 bottom-0 h-52 bg-gradient-to-t from-background via-background/80 to-transparent" aria-hidden />
         <div className="container relative">
-          {/* flex-col: hero content takes flex-1 (centered), scroll cue sits at bottom */}
-          <div className="mx-auto flex min-h-[calc(100svh-5.5rem)] max-w-6xl flex-col items-center py-8 text-center md:min-h-[calc(100svh-5rem)] md:py-10">
-            <div className="flex flex-1 flex-col items-center justify-center">
+          <div className="hero-shell mx-auto flex min-h-[calc(100svh-4.75rem)] max-w-6xl flex-col justify-center gap-6 py-6 text-center md:min-h-[calc(100svh-4.5rem)] md:gap-7 md:py-7">
+            <div className="flex flex-col items-center">
               <Reveal>
                 <div className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/80 px-3 py-1.5 text-xs font-semibold text-muted-foreground shadow-soft backdrop-blur-xl">
                   <span className="h-1.5 w-1.5 rounded-full bg-success" />
                   {site.hero.kicker}
                 </div>
-                <h1 className="hero-title mx-auto mt-6 max-w-5xl font-semibold tracking-[-0.02em] text-balance drop-shadow-sm">
+                <h1 className="hero-title mx-auto mt-6 max-w-5xl font-semibold text-balance drop-shadow-sm">
                   {copy.heroTitle.split(" ").slice(0, 2).join(" ")}{" "}
                   <span className="text-gradient">
                     {copy.heroTitle.split(" ").slice(2, 4).join(" ")}
                   </span>{" "}
                   {copy.heroTitle.split(" ").slice(4).join(" ")}
                 </h1>
-                <p className="mx-auto mt-6 max-w-2xl text-base leading-7 text-muted-foreground md:text-lg">
+                <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-muted-foreground md:text-lg">
                   {copy.heroDescription}
                 </p>
-                <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row">
+                <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
                   <Button href={localizeHref("/book", locale)}>{site.hero.primaryCta}</Button>
                   <Button href={localizeHref("/work", locale)} variant="secondary">
                     {site.hero.secondaryCta}
                   </Button>
                 </div>
-                <div className="mx-auto mt-8 grid max-w-4xl gap-3 text-left sm:grid-cols-3">
+                <div className="mx-auto mt-6 grid max-w-4xl gap-3 text-left sm:grid-cols-3">
                   {site.trustIndicators.map((indicator) => (
-                    <div key={indicator.label} className="rounded-lg border border-border bg-surface/76 p-4 shadow-soft backdrop-blur-xl">
+                    <div key={indicator.label} className="rounded-lg border border-border bg-surface/85 p-3.5 shadow-soft backdrop-blur-xl md:p-4">
                       <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
                         {indicator.label}
                       </p>
@@ -129,9 +70,8 @@ export function HomeExperience({ site, locale = "en" }: HomeExperienceProps) {
               </Reveal>
             </div>
 
-            {/* Scroll cue — below the centered content, within viewport */}
-            <div className="hidden pb-4 md:flex">
-              <ScrollCue label={locale === "fr" ? "Défiler" : "Scroll"} />
+            <div className="hidden justify-center pb-1 lg:flex">
+              <ScrollCue label={messages.common.scroll} />
             </div>
           </div>
           <Reveal delay={0.12}>
@@ -190,6 +130,8 @@ export function HomeExperience({ site, locale = "en" }: HomeExperienceProps) {
                 summary={study.summary}
                 industry={study.industry}
                 metrics={study.metrics}
+                href={localizeHref("/work", locale)}
+                ctaLabel={messages.caseStudyCard.cta}
               />
             </Reveal>
           ))}
@@ -235,7 +177,7 @@ export function HomeExperience({ site, locale = "en" }: HomeExperienceProps) {
             <p className="text-xs font-semibold uppercase tracking-[0.24em] text-accent">
               {copy.whyTunisia}
             </p>
-            <ul className="mt-5 space-y-4 text-sm leading-6 text-background/75 dark:text-muted-foreground">
+            <ul className="mt-5 space-y-4 text-sm leading-6 text-background/85 dark:text-muted-foreground">
               {site.about.whyTunisia.map((item) => (
                 <li key={item} className="flex items-start gap-3">
                   <span className="mt-2 h-1.5 w-1.5 rounded-full bg-accent" />
@@ -251,7 +193,7 @@ export function HomeExperience({ site, locale = "en" }: HomeExperienceProps) {
                 {site.about.techStack.map((tool) => (
                   <span
                     key={tool}
-                    className="rounded-full border border-background/15 px-3 py-1 text-xs text-background/75 dark:border-border dark:text-muted-foreground"
+                    className="rounded-full border border-background/20 px-3 py-1 text-xs text-background/85 dark:border-border dark:text-muted-foreground"
                   >
                     {tool}
                   </span>

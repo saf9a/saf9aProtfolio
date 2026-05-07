@@ -1,5 +1,6 @@
 import type { SiteContent } from "@/content/site";
 import { site, siteFr } from "@/content/site";
+import { messagesByLocale, type SiteMessages } from "@/content/messages";
 
 export type Locale = "en" | "fr";
 
@@ -9,6 +10,10 @@ export function getLocaleFromPathname(pathname: string): Locale {
 
 export function getSiteContent(locale: Locale): SiteContent {
   return locale === "fr" ? siteFr : site;
+}
+
+export function getMessages(locale: Locale): SiteMessages {
+  return messagesByLocale[locale];
 }
 
 export function localizeHref(href: string, locale: Locale) {

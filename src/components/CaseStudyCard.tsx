@@ -5,9 +5,18 @@ type CaseStudyCardProps = {
   summary: string;
   industry: string;
   metrics: readonly string[];
+  href: string;
+  ctaLabel: string;
 };
 
-export function CaseStudyCard({ title, summary, industry, metrics }: CaseStudyCardProps) {
+export function CaseStudyCard({
+  title,
+  summary,
+  industry,
+  metrics,
+  href,
+  ctaLabel,
+}: CaseStudyCardProps) {
   return (
     <div className="group flex h-full flex-col rounded-lg border border-border bg-surface/75 p-6 shadow-soft backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-accent/35 hover:shadow-lift">
       <p className="text-xs font-semibold uppercase tracking-[0.24em] text-accent">{industry}</p>
@@ -22,10 +31,10 @@ export function CaseStudyCard({ title, summary, industry, metrics }: CaseStudyCa
         ))}
       </ul>
       <Link
-        href="/work"
-        className="mt-auto inline-flex pt-6 text-sm font-semibold text-accent transition group-hover:translate-x-1"
+        href={href}
+        className="mt-auto inline-flex pt-6 text-sm font-semibold text-accent transition group-hover:translate-x-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
       >
-        View full case study
+        {ctaLabel}
       </Link>
     </div>
   );

@@ -3,10 +3,15 @@ import { Section } from "@/components/Section";
 import { PageHero } from "@/components/PageHero";
 import { site } from "@/content/site";
 import { buildPageMetadata } from "@/lib/seo";
+import { getMessages } from "@/lib/i18n";
+
+const locale = "en" as const;
+const messages = getMessages(locale);
+const page = messages.pages.privacy;
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "Privacy Policy",
-  description: "Privacy policy for Saf9a site visitors, contact requests, and booking requests.",
+  title: page.metadata.title,
+  description: page.metadata.description,
   path: "/privacy",
 });
 
@@ -15,27 +20,24 @@ export default function PrivacyPage() {
     <>
       <PageHero
         variant="privacy"
-        overline="Privacy"
-        title="Minimal data. Clear handling."
-        description="We respect your privacy and keep data collection to a minimum."
+        locale={locale}
+        overline={page.hero.overline}
+        title={page.hero.title}
+        description={page.hero.description}
       />
       <Section className="pt-8">
         <div className="max-w-3xl rounded-lg border border-border bg-surface/75 p-6 text-sm leading-7 text-muted-foreground shadow-soft backdrop-blur-xl md:p-8">
-          <p>
-            We only collect information you choose to share through the contact form, booking
-            request form, or by emailing us directly. We use this information to respond to your
-            request and to provide project estimates or proposals.
-          </p>
+          {page.paragraphs.map((paragraph, index) => (
+            <p key={paragraph} className={index === 0 ? undefined : "mt-5"}>
+              {paragraph}
+            </p>
+          ))}
           <p className="mt-5">
-            We do not sell or rent your data. We may store communication records for internal
-            reference and compliance.
-          </p>
-          <p className="mt-5">
-            If you have questions about your data or want it removed, contact us at{" "}
+            {page.contactPrefix}{" "}
             <a href={`mailto:${site.email}`} className="font-semibold text-accent">
               {site.email}
             </a>
-            .
+            {page.contactSuffix}
           </p>
         </div>
       </Section>

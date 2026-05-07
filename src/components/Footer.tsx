@@ -3,12 +3,13 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Logo } from "@/components/Logo";
-import { getLocaleFromPathname, getSiteContent, localizeHref } from "@/lib/i18n";
+import { getLocaleFromPathname, getMessages, getSiteContent, localizeHref } from "@/lib/i18n";
 
 export function Footer() {
   const pathname = usePathname();
   const locale = getLocaleFromPathname(pathname);
   const site = getSiteContent(locale);
+  const messages = getMessages(locale);
 
   return (
     <footer className="border-t border-border/70 bg-background/80 backdrop-blur-xl">
@@ -19,13 +20,13 @@ export function Footer() {
           <p className="text-sm text-muted-foreground">{site.location}</p>
         </div>
         <div className="space-y-3">
-          <p className="text-sm font-semibold">{locale === "fr" ? "Explorer" : "Explore"}</p>
+          <p className="text-sm font-semibold">{messages.common.explore}</p>
           <div className="flex flex-col gap-2 text-sm">
             {site.navLinks.map((link) => (
               <Link
                 key={link.label}
                 href={localizeHref(link.href, locale)}
-            className="text-muted-foreground transition hover:text-accent"
+                className="text-muted-foreground transition hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
               >
                 {link.label}
               </Link>
@@ -33,18 +34,18 @@ export function Footer() {
           </div>
         </div>
         <div className="space-y-3">
-          <p className="text-sm font-semibold">Contact</p>
-          <a href={`mailto:${site.email}`} className="text-sm text-muted-foreground transition hover:text-accent">
+          <p className="text-sm font-semibold">{messages.common.contact}</p>
+          <a href={`mailto:${site.email}`} className="text-sm text-muted-foreground transition hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent">
             {site.email}
           </a>
           <div className="flex gap-3 text-sm">
-            <a href={site.socials.linkedin} className="text-muted-foreground transition hover:text-accent">
+            <a href={site.socials.linkedin} className="text-muted-foreground transition hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent">
               LinkedIn
             </a>
-            <a href={site.socials.github} className="text-muted-foreground transition hover:text-accent">
+            <a href={site.socials.github} className="text-muted-foreground transition hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent">
               GitHub
             </a>
-            <a href={site.socials.x} className="text-muted-foreground transition hover:text-accent">
+            <a href={site.socials.x} className="text-muted-foreground transition hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent">
               X
             </a>
           </div>
@@ -54,10 +55,10 @@ export function Footer() {
         <div className="container flex flex-wrap items-center justify-between gap-3 py-6 text-xs text-muted-foreground">
           <p>
             {"(c)"} {new Date().getFullYear()} {site.name}.{" "}
-            {locale === "fr" ? "Tous droits reserves." : "All rights reserved."}
+            {messages.common.allRightsReserved}
           </p>
-          <Link href={localizeHref("/privacy", locale)} className="hover:text-accent">
-            {locale === "fr" ? "Politique de confidentialite" : "Privacy policy"}
+          <Link href={localizeHref("/privacy", locale)} className="transition hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent">
+            {messages.common.privacyPolicy}
           </Link>
         </div>
       </div>
