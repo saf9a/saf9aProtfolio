@@ -23,7 +23,7 @@ Open http://localhost:3000 to view the site.
 
 ## Content editing
 
-All copy, services, case studies, FAQs, and testimonials live in `content/site.ts`.
+All copy, services, case studies, FAQs, and testimonials live in `src/content/site.ts`.
 Update placeholders like `<STUDIO_NAME>`, `hello@<domain>.com`, and social URLs there.
 
 ## Contact form configuration
@@ -53,4 +53,4 @@ Vercel will run `npm run build` and host the App Router project automatically.
 
 ## SEO
 
-Metadata, OpenGraph, JSON-LD, sitemap, and robots are included out of the box. Update `site.url` in `content/site.ts` to your real domain.
+Metadata, OpenGraph, JSON-LD, sitemap, and robots are included out of the box. Update `site.url` in `src/content/site.ts` to your real domain.
