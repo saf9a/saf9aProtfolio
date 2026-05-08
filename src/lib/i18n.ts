@@ -4,8 +4,16 @@ import { messagesByLocale, type SiteMessages } from "@/content/messages";
 
 export type Locale = "en" | "fr";
 
-export function getLocaleFromPathname(pathname: string): Locale {
-  return pathname === "/fr" || pathname.startsWith("/fr/") ? "fr" : "en";
+export const locales = ["en", "fr"] as const;
+export const defaultLocale: Locale = "en";
+export const localeCookieName = "locale";
+
+export function isLocale(value: unknown): value is Locale {
+  return typeof value === "string" && locales.includes(value as Locale);
+}
+
+export function getLocaleFromPathname(pathname: string | null | undefined): Locale {
+  return defaultLocale;
 }
 
 export function getSiteContent(locale: Locale): SiteContent {
@@ -16,20 +24,18 @@ export function getMessages(locale: Locale): SiteMessages {
   return messagesByLocale[locale];
 }
 
+export function stripLocaleFromPathname(pathname: string): string {
+  return pathname || "/";
+}
+
 export function localizeHref(href: string, locale: Locale) {
-  if (locale === "en") {
+  if (!href.startsWith("/") || href.startsWith("//")) {
     return href;
   }
 
-  return href === "/" ? "/fr" : `/fr${href}`;
+  return href;
 }
 
 export function switchLocalePath(pathname: string, targetLocale: Locale) {
-  const currentLocale = getLocaleFromPathname(pathname);
-  const normalizedPath =
-    currentLocale === "fr"
-      ? pathname.replace(/^\/fr(?=\/|$)/, "") || "/"
-      : pathname || "/";
-
-  return localizeHref(normalizedPath, targetLocale);
+  return pathname || "/";
 }

@@ -1,15 +1,14 @@
 "use client";
 
 import { useEffect } from "react";
-import { usePathname } from "next/navigation";
-import { getLocaleFromPathname } from "@/lib/i18n";
+import { useLocale } from "@/components/LocaleProvider";
 
 export function DocumentLanguage() {
-  const pathname = usePathname();
+  const { locale } = useLocale();
 
   useEffect(() => {
-    document.documentElement.lang = getLocaleFromPathname(pathname);
-  }, [pathname]);
+    document.documentElement.lang = locale;
+  }, [locale]);
 
   return null;
 }

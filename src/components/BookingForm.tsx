@@ -1,31 +1,39 @@
 "use client";
 
-import { useState } from "react";
-import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/Button";
-import { getLocaleFromPathname, getMessages } from "@/lib/i18n";
+import { useLocale } from "@/components/LocaleProvider";
+import { getMessages } from "@/lib/i18n";
 
-const initialState = {
+const createInitialState = (preferredWindow: string) => ({
   name: "",
   email: "",
   company: "",
   service: "",
   preferredDate: "",
-  preferredWindow: "Flexible",
+  preferredWindow,
   message: "",
-};
+});
 
 const isValidEmail = (email: string) => {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 };
 
 export function BookingForm() {
-  const pathname = usePathname();
-  const locale = getLocaleFromPathname(pathname);
+  const { locale } = useLocale();
   const copy = getMessages(locale).forms.booking;
-  const [formData, setFormData] = useState(initialState);
+  const defaultPreferredWindow = copy.timeWindows[0] ?? "";
+  const [formData, setFormData] = useState(() => createInitialState(defaultPreferredWindow));
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    setFormData((prev) =>
+      copy.timeWindows.includes(prev.preferredWindow)
+        ? prev
+        : { ...prev, preferredWindow: defaultPreferredWindow }
+    );
+  }, [copy.timeWindows, defaultPreferredWindow]);
 
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -72,7 +80,7 @@ export function BookingForm() {
 
       setStatus("success");
       setMessage(copy.success);
-      setFormData(initialState);
+      setFormData(createInitialState(defaultPreferredWindow));
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : copy.fallbackError;
       setStatus("error");

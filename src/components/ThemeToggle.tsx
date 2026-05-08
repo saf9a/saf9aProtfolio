@@ -1,15 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
-import { getLocaleFromPathname, getMessages } from "@/lib/i18n";
+import { useLocale } from "@/components/LocaleProvider";
+import { getMessages } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
 const storageKey = "theme";
 
 export function ThemeToggle({ className }: { className?: string }) {
-  const pathname = usePathname();
-  const locale = getLocaleFromPathname(pathname);
+  const { locale } = useLocale();
   const messages = getMessages(locale);
   const [theme, setTheme] = useState<"light" | "dark" | null>(null);
 

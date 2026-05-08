@@ -1,33 +1,39 @@
 import type { Metadata } from "next";
-import { site } from "@/content/site";
 import { HomeExperience } from "@/components/HomeExperience";
 import { buildPageMetadata } from "@/lib/seo";
-import { getMessages } from "@/lib/i18n";
+import { getMessages, getSiteContent } from "@/lib/i18n";
+import { getRequestLocale } from "@/lib/i18n-server";
 
-const locale = "en" as const;
-const messages = getMessages(locale);
+export function generateMetadata(): Metadata {
+  const locale = getRequestLocale();
+  const site = getSiteContent(locale);
+  const messages = getMessages(locale);
 
-export const metadata: Metadata = buildPageMetadata({
-  title: messages.pages.home.metadata.title,
-  description: site.description,
-  path: "/",
-  keywords: messages.pages.home.metadata.keywords,
-});
-
-const faqJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: site.faqs.map((faq) => ({
-    "@type": "Question",
-    name: faq.question,
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: faq.answer,
-    },
-  })),
-};
+  return buildPageMetadata({
+    title: messages.pages.home.metadata.title,
+    description: site.description,
+    path: "/",
+    locale,
+    keywords: messages.pages.home.metadata.keywords,
+  });
+}
 
 export default function HomePage() {
+  const locale = getRequestLocale();
+  const site = getSiteContent(locale);
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: site.faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  };
+
   return (
     <>
       <HomeExperience site={site} locale={locale} />

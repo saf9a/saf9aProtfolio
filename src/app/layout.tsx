@@ -3,11 +3,13 @@ import type { ReactNode } from "react";
 import { Manrope, Sora } from "next/font/google";
 import "./globals.css";
 import { site } from "@/content/site";
-import { DocumentLanguage } from "@/components/DocumentLanguage";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { LocaleProvider } from "@/components/LocaleProvider";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import { SkipLink } from "@/components/SkipLink";
+import { getSiteContent } from "@/lib/i18n";
+import { getRequestLocale } from "@/lib/i18n-server";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -30,11 +32,6 @@ export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   alternates: {
     canonical: "/",
-    languages: {
-      en: "/",
-      fr: "/fr",
-      "x-default": "/",
-    },
   },
   keywords: [
     "Saf9a",
@@ -71,39 +68,39 @@ export const metadata: Metadata = {
   },
 };
 
-const jsonLd = {
+const buildJsonLd = (currentSite: typeof site) => ({
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "Organization",
-      name: site.name,
-      url: site.url,
-      email: site.email,
+      name: currentSite.name,
+      url: currentSite.url,
+      email: currentSite.email,
       address: {
         "@type": "PostalAddress",
         addressLocality: "Tunis",
         addressCountry: "TN",
       },
       areaServed: ["Tunisia", "MENA", "Europe"],
-      sameAs: [site.socials.linkedin, site.socials.github].filter(Boolean),
-      description: site.description,
+      sameAs: [currentSite.socials.linkedin, currentSite.socials.github].filter(Boolean),
+      description: currentSite.description,
     },
     {
       "@type": "ProfessionalService",
-      name: site.name,
-      url: site.url,
-      email: site.email,
+      name: currentSite.name,
+      url: currentSite.url,
+      email: currentSite.email,
       areaServed: ["Tunisia", "MENA", "Europe"],
       address: {
         "@type": "PostalAddress",
         addressLocality: "Tunis",
         addressCountry: "TN",
       },
-      description: site.description,
+      description: currentSite.description,
       serviceType: ["Web development", "DevOps consulting", "AI automation"],
     },
   ],
-};
+});
 
 const themeScript = `(() => {
   try {
@@ -120,22 +117,26 @@ export default function RootLayout({
 }: {
   children: ReactNode;
 }) {
+  const locale = getRequestLocale();
+  const currentSite = getSiteContent(locale);
+
   return (
-    <html lang="en">
+    <html lang={locale} suppressHydrationWarning>
       <body className={`${manrope.variable} ${sora.variable} bg-background text-foreground`}>
-        <ScrollProgress />
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
-        <DocumentLanguage />
-        <SkipLink />
-        <Navbar />
-        <main id="content" className="min-h-screen">
-          {children}
-        </main>
-        <Footer />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
+        <LocaleProvider initialLocale={locale}>
+          <ScrollProgress />
+          <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+          <SkipLink />
+          <Navbar />
+          <main id="content" className="min-h-screen">
+            {children}
+          </main>
+          <Footer />
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(buildJsonLd(currentSite)) }}
+          />
+        </LocaleProvider>
       </body>
     </html>
   );

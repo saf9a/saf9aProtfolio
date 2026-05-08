@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { usePathname } from "next/navigation";
 import { Button } from "@/components/Button";
-import { getLocaleFromPathname, getMessages } from "@/lib/i18n";
+import { useLocale } from "@/components/LocaleProvider";
+import { getMessages } from "@/lib/i18n";
 
 const initialState = {
   name: "",
@@ -17,8 +17,7 @@ const isValidEmail = (email: string) => {
 };
 
 export function ContactForm() {
-  const pathname = usePathname();
-  const locale = getLocaleFromPathname(pathname);
+  const { locale } = useLocale();
   const copy = getMessages(locale).forms.contact;
   const [formData, setFormData] = useState(initialState);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");

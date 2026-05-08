@@ -25,7 +25,7 @@ export default function Image() {
           {site.hero.headline}
         </div>
         <div style={{ fontSize: 20, marginTop: 32, color: "#bae6fd" }}>
-          Full-stack web, DevOps, AI automation
+          Web development, DevOps, and AI automation
         </div>
       </div>
     ),

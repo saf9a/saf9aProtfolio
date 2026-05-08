@@ -1,0 +1,306 @@
+{
+  "common": {
+    "skipToContent": "Skip to content",
+    "explore": "Explore",
+    "contact": "Contact",
+    "email": "Email",
+    "location": "Location",
+    "socials": "Socials",
+    "language": "Language",
+    "theme": "Theme",
+    "changeLanguage": "Change language",
+    "toggleTheme": "Toggle theme",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "primaryNavigation": "Primary navigation",
+    "scroll": "Scroll",
+    "allRightsReserved": "All rights reserved.",
+    "privacyPolicy": "Privacy policy",
+    "contactUs": "Contact us",
+    "viewServices": "View services",
+    "viewWork": "View work"
+  },
+  "home": {
+    "servicesOverline": "Delivery system",
+    "servicesTitle": "One team across product, cloud, and automation",
+    "servicesDescription": "Each capability connects into the next: clarify the product, ship it cleanly, then automate the work slowing the team down.",
+    "servicesCta": "View services",
+    "processOverline": "Method",
+    "processTitle": "A calm path from brief to production",
+    "processDescription": "The work moves as one continuous sequence: scope, build, harden, then iterate from real usage.",
+    "workOverline": "Outcomes",
+    "workTitle": "Projects that show the level of execution",
+    "workCta": "View work",
+    "proofOverline": "Proof",
+    "proofTitle": "Teams choose Saf9a when they need progress without noise",
+    "proofDescription": "Fewer handoffs, sharper decisions, and software that holds up in production.",
+    "faqOverline": "FAQ",
+    "faqTitle": "Questions before we start",
+    "faqDescription": "The practical details before you book a call.",
+    "aboutOverline": "Operating base",
+    "aboutTitle": "A compact senior team close to the work",
+    "stack": "Core stack",
+    "whyTunisia": "Why Tunis",
+    "email": "Direct email",
+    "heroTitle": "Launch faster. Operate cleaner. Automate smarter.",
+    "heroDescription": "Saf9a builds web products, cloud delivery systems, and AI workflows for teams that need production-grade execution without enterprise drag."
+  },
+  "pageHero": {
+    "delivery": "delivery",
+    "uptime": "uptime",
+    "handoffs": "handoffs"
+  },
+  "productShowcase": {
+    "command": "deployment",
+    "live": "prod stable",
+    "review": "AI review",
+    "timeline": "sprint plan",
+    "risk": "low risk",
+    "pipeline": "pipeline",
+    "observability": "observability"
+  },
+  "scrollStory": {
+    "overline": "Method",
+    "of": "of",
+    "build": "Build",
+    "test": "Test",
+    "deploy": "Deploy",
+    "monitor": "Monitor",
+    "productionLive": "Production live"
+  },
+  "caseStudyCard": {
+    "cta": "View full case study"
+  },
+  "caseStudyVisual": {
+    "impact": "Impact",
+    "cockpit": "Delivery cockpit",
+    "live": "Live"
+  },
+  "forms": {
+    "api": {
+      "invalidRequest": "Invalid request.",
+      "invalidContact": "Please provide a name, valid email, and message.",
+      "invalidBooking": "Please provide your name, valid email, booking type, and details.",
+      "sendFailed": "Email failed to send. Please try again.",
+      "submitFailed": "Form submission failed. Please try again.",
+      "providerMissing": "Email provider not configured."
+    },
+    "contact": {
+      "validation": "Please provide your name, a valid email, and a short message.",
+      "success": "Thanks for reaching out. We will reply within one business day.",
+      "fallbackError": "Something went wrong.",
+      "submitError": "Something went wrong. Please try again.",
+      "name": "Name",
+      "email": "Email",
+      "company": "Company (optional)",
+      "projectDetails": "Project details",
+      "namePlaceholder": "Your name",
+      "emailPlaceholder": "you@company.com",
+      "companyPlaceholder": "Company or project",
+      "detailsPlaceholder": "Tell us about your goals, timeline, and the outcomes you need.",
+      "sending": "Sending...",
+      "submit": "Send message",
+      "note": "We reply within one business day."
+    },
+    "booking": {
+      "validation": "Please provide your name, a valid email, call type, and a short brief.",
+      "success": "Thanks. We received your booking request and will confirm by email within one business day.",
+      "fallbackError": "Something went wrong.",
+      "submitError": "Something went wrong. Please try again.",
+      "name": "Name",
+      "email": "Email",
+      "company": "Company (optional)",
+      "callType": "Call type",
+      "preferredDate": "Preferred date (optional)",
+      "preferredWindow": "Preferred time window",
+      "prepare": "What should we prepare for?",
+      "namePlaceholder": "Your name",
+      "emailPlaceholder": "you@company.com",
+      "companyPlaceholder": "Company or project",
+      "callTypePlaceholder": "Select a call type",
+      "callTypes": [
+        "Discovery call",
+        "Project scoping",
+        "DevOps planning",
+        "AI automation review",
+        "General consultation"
+      ],
+      "timeWindows": [
+        "Flexible",
+        "Morning",
+        "Afternoon",
+        "Late afternoon"
+      ],
+      "detailsPlaceholder": "Tell us the goal of the call, context, timeline, and anything you want reviewed.",
+      "sending": "Sending...",
+      "submit": "Request booking",
+      "note": "We confirm bookings by email within one business day."
+    }
+  },
+  "pages": {
+    "home": {
+      "metadata": {
+        "title": "Web Development, DevOps & AI Automation in Tunisia",
+        "keywords": [
+          "Saf9a",
+          "web development Tunisia",
+          "DevOps Tunisia",
+          "AI automation Tunisia",
+          "web development studio Tunis"
+        ]
+      }
+    },
+    "services": {
+      "metadata": {
+        "title": "Web Development, DevOps & AI Automation Services",
+        "description": "Explore Saf9a services for web development, DevOps consulting, and AI automation from Tunis, Tunisia.",
+        "keywords": [
+          "web development services Tunisia",
+          "DevOps consulting Tunisia",
+          "AI automation services Tunisia",
+          "Tunis software studio"
+        ]
+      },
+      "hero": {
+        "overline": "Services",
+        "title": "Product, cloud, and AI delivery in one system.",
+        "description": "Founder-led delivery from Tunis, Tunisia with clear scopes, fast timelines, and production-ready execution.",
+        "secondaryLabel": "Talk to us"
+      },
+      "offerLabels": {
+        "whatYouGet": "What you get",
+        "timeline": "Timeline",
+        "idealFor": "Ideal for:"
+      },
+      "cta": {
+        "headline": "Not sure which offer fits?",
+        "description": "We can help you choose the right scope in a 20-minute discovery call.",
+        "secondaryLabel": "Contact us"
+      }
+    },
+    "work": {
+      "metadata": {
+        "title": "Case Studies in Web Development, DevOps & AI Automation",
+        "description": "See how Saf9a delivers web development, DevOps, and AI automation projects with measurable business results.",
+        "keywords": [
+          "web development case studies",
+          "DevOps case studies",
+          "AI automation projects",
+          "Saf9a work"
+        ]
+      },
+      "hero": {
+        "overline": "Case studies",
+        "title": "Proof that the system ships.",
+        "secondaryLabel": "View services"
+      },
+      "labels": {
+        "problem": "Problem",
+        "solution": "Solution",
+        "results": "Results",
+        "timeline": "Timeline",
+        "techStack": "Tech stack",
+        "impact": "Impact"
+      },
+      "cta": {
+        "headline": "Want to build something similar?",
+        "description": "Tell us about your project and we will suggest the best approach.",
+        "secondaryLabel": "Contact us"
+      }
+    },
+    "about": {
+      "metadata": {
+        "title": "About Saf9a",
+        "description": "Meet Saf9a, a Tunis, Tunisia studio offering web development, DevOps, and AI automation with direct founder-led delivery.",
+        "keywords": [
+          "about Saf9a",
+          "Tunis web development studio",
+          "DevOps Tunisia",
+          "AI automation Tunisia"
+        ]
+      },
+      "hero": {
+        "overline": "About",
+        "title": "Senior builders. Small team. Clean execution.",
+        "secondaryLabel": "View work"
+      },
+      "founders": {
+        "overline": "Founders",
+        "title": "Direct access to the people doing the work",
+        "description": "No account managers, no handoffs. You work with the builders."
+      },
+      "whyTunisia": {
+        "overline": "Why Tunisia",
+        "title": "A strategic base for global delivery",
+        "description": "We combine local speed with international quality expectations."
+      },
+      "techStack": {
+        "title": "Core tech stack",
+        "description": "Modern, scalable tools that keep delivery fast and reliable."
+      }
+    },
+    "contact": {
+      "metadata": {
+        "title": "Contact Saf9a",
+        "description": "Contact Saf9a in Tunis, Tunisia about web development, DevOps, and AI automation projects.",
+        "keywords": [
+          "contact Saf9a",
+          "Tunis web development contact",
+          "DevOps Tunisia contact"
+        ]
+      },
+      "hero": {
+        "overline": "Contact",
+        "title": "Start with a clear signal."
+      },
+      "customBooking": {
+        "title": "Need a custom booking?",
+        "description": "Share a preferred time window and we will confirm the best slot by email."
+      }
+    },
+    "book": {
+      "metadata": {
+        "title": "Request a Call",
+        "description": "Request a call with Saf9a for web development, DevOps, or AI automation projects and planning.",
+        "keywords": [
+          "request a call Saf9a",
+          "book web development consultation",
+          "DevOps consultation Tunisia"
+        ]
+      },
+      "hero": {
+        "overline": "Booking",
+        "title": "Book a focused build call."
+      },
+      "next": {
+        "title": "What happens next",
+        "steps": [
+          "We review your request and confirm the best call format.",
+          "We reply by email within one business day with a confirmed time.",
+          "We show up prepared with context, questions, and next steps."
+        ]
+      },
+      "email": {
+        "title": "Prefer email instead?",
+        "description": "Send your availability and project context directly and we will take it from there."
+      }
+    },
+    "privacy": {
+      "metadata": {
+        "title": "Privacy Policy",
+        "description": "Privacy policy for Saf9a site visitors, contact requests, and booking requests."
+      },
+      "hero": {
+        "overline": "Privacy",
+        "title": "Minimal data. Clear handling.",
+        "description": "We respect your privacy and keep data collection to a minimum."
+      },
+      "paragraphs": [
+        "We only collect information you choose to share through the contact form, booking request form, or by emailing us directly. We use this information to respond to your request and to provide project estimates or proposals.",
+        "We do not sell or rent your data. We may store communication records for internal reference and compliance."
+      ],
+      "contactPrefix": "If you have questions about your data or want it removed, contact us at",
+      "contactSuffix": "."
+    }
+  }
+}

@@ -1,16 +1,14 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import type { Locale } from "@/lib/i18n";
+import { useLocale } from "@/components/LocaleProvider";
 import { cn } from "@/lib/utils";
-import { getLocaleFromPathname, getMessages, switchLocalePath } from "@/lib/i18n";
+import { getMessages } from "@/lib/i18n";
 
 export function LanguageToggle({ className }: { className?: string }) {
-  const pathname = usePathname();
-  const locale = getLocaleFromPathname(pathname);
+  const { locale, setLocale } = useLocale();
   const messages = getMessages(locale);
-  const enHref = switchLocalePath(pathname, "en");
-  const frHref = switchLocalePath(pathname, "fr");
+  const options: Locale[] = ["en", "fr"];
 
   return (
     <div
@@ -20,26 +18,22 @@ export function LanguageToggle({ className }: { className?: string }) {
       )}
       aria-label={messages.common.changeLanguage}
     >
-      <Link
-        href={enHref}
-        className={cn(
-          "rounded-full px-2.5 py-1 transition",
-          locale === "en" ? "bg-foreground text-background" : "text-muted-foreground hover:text-foreground"
-        )}
-        aria-current={locale === "en" ? "true" : undefined}
-      >
-        EN
-      </Link>
-      <Link
-        href={frHref}
-        className={cn(
-          "rounded-full px-2.5 py-1 transition",
-          locale === "fr" ? "bg-foreground text-background" : "text-muted-foreground hover:text-foreground"
-        )}
-        aria-current={locale === "fr" ? "true" : undefined}
-      >
-        FR
-      </Link>
+      {options.map((option) => (
+        <button
+          key={option}
+          type="button"
+          className={cn(
+            "rounded-full px-2.5 py-1 uppercase transition",
+            locale === option
+              ? "bg-foreground text-background"
+              : "text-muted-foreground hover:text-foreground"
+          )}
+          aria-current={locale === option ? "true" : undefined}
+          onClick={() => setLocale(option)}
+        >
+          {option}
+        </button>
+      ))}
     </div>
   );
 }

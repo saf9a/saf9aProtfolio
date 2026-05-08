@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { site } from "@/content/site";
-import { getMessages, type Locale } from "@/lib/i18n";
+import { getMessages, isLocale, type Locale } from "@/lib/i18n";
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -38,7 +38,8 @@ export async function POST(request: Request) {
   };
 
   const isBooking = submissionType === "booking";
-  const copy = getMessages(locale === "fr" ? "fr" : "en").forms.api;
+  const safeLocale = isLocale(locale) ? locale : "en";
+  const copy = getMessages(safeLocale).forms.api;
 
   if (!name || !email || !emailRegex.test(email) || !message || (isBooking && !service)) {
     return NextResponse.json(

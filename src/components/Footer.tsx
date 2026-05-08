@@ -1,13 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useLocale } from "@/components/LocaleProvider";
 import { Logo } from "@/components/Logo";
-import { getLocaleFromPathname, getMessages, getSiteContent, localizeHref } from "@/lib/i18n";
+import { getMessages, getSiteContent, localizeHref } from "@/lib/i18n";
 
 export function Footer() {
-  const pathname = usePathname();
-  const locale = getLocaleFromPathname(pathname);
+  const { locale } = useLocale();
   const site = getSiteContent(locale);
   const messages = getMessages(locale);
 

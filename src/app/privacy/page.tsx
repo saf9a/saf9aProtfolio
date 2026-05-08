@@ -1,21 +1,27 @@
 import type { Metadata } from "next";
 import { Section } from "@/components/Section";
 import { PageHero } from "@/components/PageHero";
-import { site } from "@/content/site";
 import { buildPageMetadata } from "@/lib/seo";
-import { getMessages } from "@/lib/i18n";
+import { getMessages, getSiteContent } from "@/lib/i18n";
+import { getRequestLocale } from "@/lib/i18n-server";
 
-const locale = "en" as const;
-const messages = getMessages(locale);
-const page = messages.pages.privacy;
+export function generateMetadata(): Metadata {
+  const locale = getRequestLocale();
+  const page = getMessages(locale).pages.privacy;
 
-export const metadata: Metadata = buildPageMetadata({
-  title: page.metadata.title,
-  description: page.metadata.description,
-  path: "/privacy",
-});
+  return buildPageMetadata({
+    title: page.metadata.title,
+    description: page.metadata.description,
+    path: "/privacy",
+    locale,
+  });
+}
 
 export default function PrivacyPage() {
+  const locale = getRequestLocale();
+  const site = getSiteContent(locale);
+  const page = getMessages(locale).pages.privacy;
+
   return (
     <>
       <PageHero

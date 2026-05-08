@@ -23,7 +23,8 @@ Open http://localhost:3000 to view the site.
 
 ## Content editing
 
-All copy, services, case studies, FAQs, and testimonials live in `src/content/site.ts`.
+All locale-aware site content, services, case studies, FAQs, and testimonials live in `src/content/site.ts`.
+Shared UI messages and form copy live in `src/messages/en.json` and `src/messages/fr.json`.
 Update placeholders like `<STUDIO_NAME>`, `hello@<domain>.com`, and social URLs there.
 
 ## Contact form configuration

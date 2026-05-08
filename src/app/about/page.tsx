@@ -1,23 +1,29 @@
 import type { Metadata } from "next";
-import { site } from "@/content/site";
 import { PageHero } from "@/components/PageHero";
 import { Section } from "@/components/Section";
 import { SectionHeading } from "@/components/SectionHeading";
 import { buildPageMetadata } from "@/lib/seo";
-import { getMessages, localizeHref } from "@/lib/i18n";
+import { getMessages, getSiteContent, localizeHref } from "@/lib/i18n";
+import { getRequestLocale } from "@/lib/i18n-server";
 
-const locale = "en" as const;
-const messages = getMessages(locale);
-const page = messages.pages.about;
+export function generateMetadata(): Metadata {
+  const locale = getRequestLocale();
+  const page = getMessages(locale).pages.about;
 
-export const metadata: Metadata = buildPageMetadata({
-  title: page.metadata.title,
-  description: page.metadata.description,
-  path: "/about",
-  keywords: page.metadata.keywords,
-});
+  return buildPageMetadata({
+    title: page.metadata.title,
+    description: page.metadata.description,
+    path: "/about",
+    locale,
+    keywords: page.metadata.keywords,
+  });
+}
 
 export default function AboutPage() {
+  const locale = getRequestLocale();
+  const site = getSiteContent(locale);
+  const page = getMessages(locale).pages.about;
+
   return (
     <>
       <PageHero

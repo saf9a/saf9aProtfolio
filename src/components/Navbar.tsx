@@ -6,14 +6,15 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/Button";
 import { LanguageToggle } from "@/components/LanguageToggle";
+import { useLocale } from "@/components/LocaleProvider";
 import { Logo } from "@/components/Logo";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { cn } from "@/lib/utils";
-import { getLocaleFromPathname, getMessages, getSiteContent, localizeHref } from "@/lib/i18n";
+import { getMessages, getSiteContent, localizeHref } from "@/lib/i18n";
 
 export function Navbar() {
   const pathname = usePathname();
-  const locale = getLocaleFromPathname(pathname);
+  const { locale } = useLocale();
   const site = getSiteContent(locale);
   const messages = getMessages(locale);
   const prefersReducedMotion = useReducedMotion();

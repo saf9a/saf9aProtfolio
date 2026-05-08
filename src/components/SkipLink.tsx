@@ -1,11 +1,11 @@
 "use client";
 
-import { usePathname } from "next/navigation";
-import { getLocaleFromPathname, getMessages } from "@/lib/i18n";
+import { useLocale } from "@/components/LocaleProvider";
+import { getMessages } from "@/lib/i18n";
 
 export function SkipLink() {
-  const pathname = usePathname();
-  const messages = getMessages(getLocaleFromPathname(pathname));
+  const { locale } = useLocale();
+  const messages = getMessages(locale);
 
   return (
     <a

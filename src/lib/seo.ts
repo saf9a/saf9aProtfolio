@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { site } from "@/content/site";
-import { switchLocalePath, type Locale } from "@/lib/i18n";
+import type { Locale } from "@/lib/i18n";
 
 type PageMetadataOptions = {
   title: string;
@@ -25,11 +25,6 @@ export function buildPageMetadata({
     keywords,
     alternates: {
       canonical: path,
-      languages: {
-        en: switchLocalePath(path, "en"),
-        fr: switchLocalePath(path, "fr"),
-        "x-default": switchLocalePath(path, "en"),
-      },
     },
     openGraph: {
       title: fullTitle,
